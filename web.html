@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COMPUCEL SOLUTIONS JM — Servicio Técnico Especializado | Curicó</title>
+<meta name="description" content="Servicio técnico especializado en reparación de celulares, laptops, PC, consolas y más. Liberaciones, desbloqueos y venta de accesorios en Curicó.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#030712;--s1:#060f1e;--s2:#0a1628;--s3:#0d1f38;
+  --acc:#00f5d4;--acc2:#7c3aed;--gold:#fbbf24;--red:#f43f5e;
+  --t1:#f0f4ff;--t2:#8ba3c7;--t3:#3d5478;--bd:#1a2f50;
+  --font:'Exo 2',sans-serif;--display:'Orbitron',monospace;
+  --glow:0 0 20px rgba(0,245,212,.3),0 0 40px rgba(0,245,212,.1);
+  --glow2:0 0 20px rgba(124,58,237,.4);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t1);font-family:var(--font);overflow-x:hidden;line-height:1.6}
+
+/* SCANLINE EFFECT */
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,rgba(0,245,212,.015) 0px,transparent 1px,transparent 3px);pointer-events:none;z-index:9999}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(3,7,18,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,245,212,.1)}
+.nav-logo{font-family:var(--display);font-size:15px;font-weight:900;color:var(--acc);letter-spacing:2px;text-decoration:none;display:flex;align-items:center;gap:10px}
+.nav-logo-icon{width:36px;height:36px;border:2px solid var(--acc);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{color:var(--t2);text-decoration:none;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--acc);transition:width .3s}
+.nav-links a:hover{color:var(--acc)}.nav-links a:hover::after{width:100%}
+.nav-cta{background:transparent;border:1px solid var(--acc);color:var(--acc);padding:8px 20px;border-radius:4px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:all .2s;font-family:var(--font)}
+.nav-cta:hover{background:var(--acc);color:#000;box-shadow:var(--glow)}
+.nav-badge{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--acc);font-family:var(--display)}
+.nav-dot{width:6px;height:6px;background:var(--acc);border-radius:50%;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 40px 80px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(0,245,212,.06) 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(124,58,237,.06) 0%,transparent 50%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,245,212,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,212,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.hero-content{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,245,212,.08);border:1px solid rgba(0,245,212,.25);padding:6px 14px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--acc);margin-bottom:24px}
+.hero-title{font-family:var(--display);font-size:52px;font-weight:900;line-height:1.05;letter-spacing:-1px;margin-bottom:20px}
+.hero-title .accent{color:var(--acc);text-shadow:var(--glow)}
+.hero-title .line2{color:var(--t2);font-size:32px;font-weight:400;display:block;margin-top:8px;font-family:var(--font);letter-spacing:0}
+.hero-desc{font-size:16px;color:var(--t2);line-height:1.7;margin-bottom:36px;max-width:480px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--acc);color:#000;padding:14px 28px;border-radius:6px;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:all .2s;border:none;cursor:pointer;font-family:var(--font)}
+.btn-primary:hover{box-shadow:var(--glow);transform:translateY(-2px)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--t1);padding:14px 28px;border-radius:6px;font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:all .2s;border:1px solid var(--bd)}
+.btn-secondary:hover{border-color:var(--acc);color:var(--acc)}
+.hero-stats{display:flex;gap:32px;margin-top:40px;padding-top:36px;border-top:1px solid var(--bd)}
+.stat-item .num{font-family:var(--display);font-size:28px;font-weight:900;color:var(--acc)}
+.stat-item .lbl{font-size:11px;color:var(--t3);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+
+/* DEVICE VISUAL */
+.hero-visual{position:relative;display:flex;justify-content:center;align-items:center}
+.device-ring{width:360px;height:360px;border-radius:50%;border:1px solid rgba(0,245,212,.1);display:flex;align-items:center;justify-content:center;position:relative;animation:rotate 20s linear infinite}
+.device-ring::before{content:'';position:absolute;inset:-20px;border-radius:50%;border:1px dashed rgba(0,245,212,.05);animation:rotate 30s linear infinite reverse}
+@keyframes rotate{to{transform:rotate(360deg)}}
+.device-center{width:200px;height:200px;background:var(--s2);border-radius:20px;border:1px solid rgba(0,245,212,.2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;animation:rotate 20s linear infinite reverse;box-shadow:0 0 40px rgba(0,245,212,.1)}
+.device-icon{font-size:48px}
+.device-label{font-family:var(--display);font-size:11px;color:var(--acc);letter-spacing:2px}
+.orbit-item{position:absolute;width:44px;height:44px;background:var(--s3);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;border:1px solid var(--bd);animation:rotate 20s linear infinite reverse;box-shadow:0 0 10px rgba(0,245,212,.1)}
+
+/* SECTIONS */
+section{padding:80px 40px}
+.container{max-width:1200px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:60px}
+.section-tag{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--acc);font-family:var(--display);margin-bottom:12px}
+.section-title{font-family:var(--display);font-size:36px;font-weight:900;color:var(--t1);margin-bottom:14px}
+.section-desc{font-size:15px;color:var(--t2);max-width:600px;margin:0 auto;line-height:1.7}
+
+/* SERVICIOS */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.service-card{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:28px;position:relative;overflow:hidden;transition:all .3s;cursor:default}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--acc),transparent);transform:translateX(-100%);transition:transform .5s}
+.service-card:hover{border-color:rgba(0,245,212,.4);transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,245,212,.08)}
+.service-card:hover::before{transform:translateX(100%)}
+.service-icon{font-size:36px;margin-bottom:16px;display:block}
+.service-name{font-family:var(--display);font-size:14px;font-weight:700;color:var(--t1);margin-bottom:8px;letter-spacing:.5px}
+.service-desc{font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:16px}
+.service-tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:10px;background:rgba(0,245,212,.08);color:var(--acc);border:1px solid rgba(0,245,212,.2);padding:3px 8px;border-radius:4px;font-weight:600;letter-spacing:.5px}
+.price-tag{font-size:11px;color:var(--gold);font-weight:700;font-family:var(--display);margin-top:12px}
+
+/* CATÁLOGO / ACCESORIOS */
+#catalogo{background:var(--s1)}
+.catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.product-card{background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:20px;text-align:center;transition:all .3s}
+.product-card:hover{border-color:rgba(124,58,237,.4);transform:translateY(-3px);box-shadow:0 6px 24px rgba(124,58,237,.08)}
+.product-emoji{font-size:40px;margin-bottom:12px;display:block}
+.product-name{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:6px}
+.product-price{font-family:var(--display);font-size:14px;color:var(--acc);font-weight:700}
+.product-stock{font-size:11px;color:var(--t3);margin-top:4px}
+
+/* SEGUIMIENTO */
+#seguimiento{background:linear-gradient(135deg,var(--s2) 0%,var(--bg) 100%);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)}
+.tracking-card{background:var(--s1);border:1px solid rgba(0,245,212,.2);border-radius:16px;padding:40px;max-width:600px;margin:0 auto;box-shadow:0 0 60px rgba(0,245,212,.05)}
+.tracking-input-row{display:flex;gap:10px;margin-top:24px}
+.tracking-input{flex:1;background:var(--s2);border:1px solid var(--bd);color:var(--t1);padding:13px 16px;border-radius:8px;font-size:14px;font-family:var(--display);outline:none;letter-spacing:1px;transition:border-color .2s}
+.tracking-input:focus{border-color:var(--acc)}
+.tracking-input::placeholder{color:var(--t3);font-family:var(--font);letter-spacing:0}
+.tracking-btn{background:var(--acc);color:#000;border:none;padding:13px 24px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font);letter-spacing:1px;text-transform:uppercase;transition:all .2s;white-space:nowrap}
+.tracking-btn:hover{box-shadow:var(--glow)}
+.tracking-result{margin-top:24px;display:none}
+.status-steps{display:flex;gap:0;position:relative;margin:20px 0}
+.status-steps::before{content:'';position:absolute;top:10px;left:12.5%;right:12.5%;height:2px;background:var(--bd)}
+.step{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;z-index:1}
+.step-dot{width:20px;height:20px;border-radius:50%;background:var(--bd);border:2px solid var(--bd);transition:all .3s}
+.step-dot.active{background:var(--acc);border-color:var(--acc);box-shadow:0 0 12px var(--acc)}
+.step-dot.done{background:var(--acc);border-color:var(--acc)}
+.step-lbl{font-size:10px;color:var(--t3);font-family:var(--display);letter-spacing:.5px;text-align:center}
+.step-lbl.active{color:var(--acc)}
+.order-details{background:var(--s2);border-radius:10px;padding:16px;margin-top:16px}
+.order-row{display:flex;justify-content:space-between;padding:6px 0;font-size:13px;border-bottom:1px solid rgba(255,255,255,.04)}
+.order-row:last-child{border:none}
+.order-row span:first-child{color:var(--t2)}
+.order-row span:last-child{font-weight:600;color:var(--t1)}
+.tracking-error{color:var(--red);font-size:13px;margin-top:12px;display:none}
+
+/* TESTIMONIOS */
+.testimonios-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.testimonio-card{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:28px;transition:all .3s}
+.testimonio-card:hover{border-color:rgba(0,245,212,.2);transform:translateY(-3px)}
+.stars{color:var(--gold);font-size:16px;margin-bottom:12px;letter-spacing:2px}
+.testimonio-text{font-size:14px;color:var(--t2);line-height:1.7;margin-bottom:18px;font-style:italic}
+.testimonio-text::before{content:'"';font-size:40px;color:var(--acc);line-height:0;vertical-align:-16px;opacity:.3}
+.testimonio-author{display:flex;align-items:center;gap:12px}
+.author-avatar{width:40px;height:40px;background:linear-gradient(135deg,var(--acc),var(--acc2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#000}
+.author-name{font-size:13px;font-weight:700;color:var(--t1)}
+.author-service{font-size:11px;color:var(--t3)}
+
+/* BLOG */
+#blog{background:var(--s1)}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+.blog-card{background:var(--bg);border:1px solid var(--bd);border-radius:12px;overflow:hidden;transition:all .3s;cursor:pointer}
+.blog-card:hover{border-color:rgba(0,245,212,.3);transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,0,0,.3)}
+.blog-img{height:160px;display:flex;align-items:center;justify-content:center;font-size:60px;background:var(--s2);position:relative;overflow:hidden}
+.blog-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,var(--bg));pointer-events:none}
+.blog-content{padding:20px}
+.blog-tag{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--acc);margin-bottom:8px}
+.blog-title{font-size:15px;font-weight:700;color:var(--t1);margin-bottom:8px;line-height:1.4}
+.blog-excerpt{font-size:13px;color:var(--t2);line-height:1.6}
+.blog-meta{display:flex;align-items:center;justify-content:space-between;margin-top:14px;font-size:11px;color:var(--t3)}
+
+/* CONTACTO */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.contact-info{display:flex;flex-direction:column;gap:24px}
+.contact-item{display:flex;align-items:flex-start;gap:16px}
+.contact-icon{width:44px;height:44px;background:rgba(0,245,212,.08);border:1px solid rgba(0,245,212,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.contact-label{font-size:11px;color:var(--t3);font-family:var(--display);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.contact-value{font-size:14px;color:var(--t1);font-weight:600}
+.contact-value a{color:var(--acc);text-decoration:none}
+.contact-form{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:32px}
+.form-field{margin-bottom:16px}
+.form-field label{display:block;font-size:11px;font-weight:700;color:var(--t2);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;font-family:var(--display)}
+.form-field input,.form-field select,.form-field textarea{width:100%;background:var(--s2);border:1px solid var(--bd);color:var(--t1);padding:11px 14px;border-radius:8px;font-size:13px;font-family:var(--font);outline:none;transition:border-color .2s}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--acc)}
+.form-field select option{background:var(--s2)}
+.form-field textarea{resize:vertical;min-height:100px}
+.form-field input::placeholder,.form-field textarea::placeholder{color:var(--t3)}
+
+/* MAP PLACEHOLDER */
+.map-placeholder{background:var(--s2);border:1px solid var(--bd);border-radius:12px;height:200px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;margin-top:20px;cursor:pointer;transition:border-color .2s;text-decoration:none}
+.map-placeholder:hover{border-color:var(--acc)}
+.map-placeholder .map-icon{font-size:32px}
+.map-placeholder p{font-size:13px;color:var(--t2)}
+.map-placeholder strong{font-size:12px;color:var(--acc);font-family:var(--display);letter-spacing:1px}
+
+/* WA BUTTON */
+.wa-float{position:fixed;bottom:28px;right:28px;z-index:200;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);cursor:pointer;transition:all .2s;animation:float 3s ease-in-out infinite;text-decoration:none}
+.wa-float:hover{transform:scale(1.1);box-shadow:0 6px 30px rgba(37,211,102,.6)}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.wa-float svg{width:28px;height:28px}
+
+/* ADMIN BUTTON */
+.admin-btn{position:fixed;bottom:28px;left:28px;z-index:200;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.4);color:var(--t2);padding:10px 16px;border-radius:8px;font-size:11px;font-family:var(--display);letter-spacing:1px;cursor:pointer;transition:all .2s;text-decoration:none;display:flex;align-items:center;gap:8px}
+.admin-btn:hover{background:rgba(124,58,237,.25);color:var(--t1);border-color:rgba(124,58,237,.7)}
+.admin-dot{width:6px;height:6px;background:var(--acc2);border-radius:50%}
+
+/* FOOTER */
+footer{background:var(--s1);border-top:1px solid var(--bd);padding:48px 40px 24px}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-brand h3{font-family:var(--display);font-size:16px;font-weight:900;color:var(--acc);letter-spacing:2px;margin-bottom:10px}
+.footer-brand p{font-size:13px;color:var(--t2);line-height:1.7;max-width:280px}
+.footer-col h4{font-size:11px;font-weight:700;color:var(--t1);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;font-family:var(--display)}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-col ul li a{color:var(--t2);text-decoration:none;font-size:13px;transition:color .2s}
+.footer-col ul li a:hover{color:var(--acc)}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--bd);font-size:12px;color:var(--t3)}
+.social-links{display:flex;gap:12px}
+.social-link{width:34px;height:34px;border:1px solid var(--bd);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;text-decoration:none;transition:all .2s}
+.social-link:hover{border-color:var(--acc);box-shadow:0 0 10px rgba(0,245,212,.2)}
+
+/* HAMBURGER */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--t1);transition:all .3s;border-radius:2px}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(3,7,18,.97);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:var(--display);font-size:20px;font-weight:700;color:var(--t2);text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
+.mobile-menu a:hover{color:var(--acc)}
+.mobile-close{position:absolute;top:20px;right:20px;font-size:28px;cursor:pointer;color:var(--t2)}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .6s,transform .6s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* SUPABASE INTEGRATION */
+.live-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;color:var(--acc);font-family:var(--display);letter-spacing:1px;margin-bottom:8px}
+.live-dot{width:6px;height:6px;background:var(--acc);border-radius:50%;animation:pulse 1.5s infinite}
+
+@media(max-width:768px){
+  nav{padding:14px 20px}
+  .nav-links,.nav-cta,.nav-badge{display:none}
+  .hamburger{display:flex}
+  .hero{padding:100px 20px 60px}
+  .hero-content{grid-template-columns:1fr;gap:40px}
+  .hero-visual{display:none}
+  .hero-title{font-size:32px}
+  section{padding:60px 20px}
+  .section-title{font-size:26px}
+  .contact-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .hero-stats{gap:20px;flex-wrap:wrap}
+  .tracking-input-row{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">CS</div>
+    COMPUCEL
+  </a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#catalogo">Accesorios</a></li>
+    <li><a href="#seguimiento">Seguimiento</a></li>
+    <li><a href="#blog">Consejos</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:16px">
+    <div class="nav-badge"><span class="nav-dot"></span>CURICÓ · ABIERTO</div>
+    <a href="https://wa.me/56979726434" class="nav-cta" target="_blank">WhatsApp</a>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mobile-close" onclick="toggleMenu()">✕</span>
+  <a href="#servicios" onclick="toggleMenu()">Servicios</a>
+  <a href="#catalogo" onclick="toggleMenu()">Accesorios</a>
+  <a href="#seguimiento" onclick="toggleMenu()">Seguimiento</a>
+  <a href="#blog" onclick="toggleMenu()">Consejos</a>
+  <a href="#contacto" onclick="toggleMenu()">Contacto</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div>
+      <div class="hero-badge">⚡ Servicio técnico especializado</div>
+      <h1 class="hero-title">
+        <span class="accent">COMPUCEL</span>
+        SOLUTIONS JM
+        <span class="line2">Tu tecnología en las mejores manos</span>
+      </h1>
+      <p class="hero-desc">Reparación profesional de celulares, laptops, PC, consolas y Smart TV en Curicó. Liberaciones, desbloqueos y venta de accesorios originales.</p>
+      <div class="hero-ctas">
+        <a href="https://wa.me/56979726434?text=Hola, necesito servicio técnico" class="btn-primary" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M11.99 0C5.376 0 .001 5.375.001 11.99c0 2.111.549 4.094 1.508 5.82L0 24l6.335-1.483A11.944 11.944 0 0 0 11.99 24C18.604 24 24 18.625 24 12.01 24 5.375 18.604 0 11.99 0zm0 21.818a9.828 9.828 0 0 1-5.01-1.374l-.36-.214-3.726.872.923-3.616-.234-.373A9.777 9.777 0 0 1 2.182 12.01c0-5.413 4.406-9.818 9.808-9.818 5.413 0 9.819 4.405 9.819 9.818 0 5.414-4.406 9.808-9.819 9.808z"/></svg>
+          Cotizar ahora
+        </a>
+        <a href="#seguimiento" class="btn-secondary">🔍 Rastrear mi equipo</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><div class="num">500+</div><div class="lbl">Equipos reparados</div></div>
+        <div class="stat-item"><div class="num">5★</div><div class="lbl">Calificación</div></div>
+        <div class="stat-item"><div class="num">24h</div><div class="lbl">Tiempo promedio</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="device-ring">
+        <div style="position:absolute;top:20px;left:50%;transform:translateX(-50%)"><div class="orbit-item">📱</div></div>
+        <div style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%)"><div class="orbit-item">💻</div></div>
+        <div style="position:absolute;left:20px;top:50%;transform:translateY(-50%)"><div class="orbit-item">🎮</div></div>
+        <div style="position:absolute;right:20px;top:50%;transform:translateY(-50%)"><div class="orbit-item">🖥️</div></div>
+        <div class="device-center">
+          <span class="device-icon">⚡</span>
+          <span class="device-label">TECH REPAIR</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">// Nuestros servicios</div>
+      <h2 class="section-title">¿Qué reparamos?</h2>
+      <p class="section-desc">Somos expertos en todo tipo de dispositivos electrónicos. Si tiene problemas, nosotros lo solucionamos.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="service-icon">📱</span>
+        <div class="service-name">SMARTPHONES</div>
+        <p class="service-desc">Cambio de pantalla, batería, conector de carga, cámara, daño por agua y más. Todas las marcas.</p>
+        <div class="service-tags"><span class="tag">Samsung</span><span class="tag">iPhone</span><span class="tag">Xiaomi</span><span class="tag">Motorola</span></div>
+        <div class="price-tag">Desde $15.000 CLP</div>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-icon">💻</span>
+        <div class="service-name">LAPTOPS & PC</div>
+        <p class="service-desc">Formateo, instalación de Windows, cambio de disco, RAM, pantalla, teclado y reparación de placa.</p>
+        <div class="service-tags"><span class="tag">HP</span><span class="tag">Dell</span><span class="tag">Lenovo</span><span class="tag">Apple</span></div>
+        <div class="price-tag">Desde $20.000 CLP</div>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-icon">🎮</span>
+        <div class="service-name">CONSOLAS</div>
+        <p class="service-desc">Reparación de PlayStation, Xbox, Nintendo Switch. Cambio de joystick, lente óptico, fuente de poder.</p>
+        <div class="service-tags"><span class="tag">PS4/PS5</span><span class="tag">Xbox</span><span class="tag">Switch</span></div>
+        <div class="price-tag">Desde $25.000 CLP</div>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-icon">📺</span>
+        <div class="service-name">SMART TV</div>
+        <p class="service-desc">Diagnóstico y reparación de Smart TV. Problemas de imagen, sonido, Wi-Fi y actualizaciones de firmware.</p>
+        <div class="service-tags"><span class="tag">Samsung</span><span class="tag">LG</span><span class="tag">Sony</span><span class="tag">TCL</span></div>
+        <div class="price-tag">Desde $30.000 CLP</div>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-icon">🔓</span>
+        <div class="service-name">LIBERACIONES</div>
+        <p class="service-desc">Liberación de celulares de operador. Desbloqueo FRP/Google Account y iCloud. Rápido y garantizado.</p>
+        <div class="service-tags"><span class="tag">Movistar</span><span class="tag">Entel</span><span class="tag">Claro</span><span class="tag">WOM</span></div>
+        <div class="price-tag">Desde $8.000 CLP</div>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-icon">🛡️</span>
+        <div class="service-name">MANTENIMIENTO</div>
+        <p class="service-desc">Limpieza interna, eliminación de virus y malware, optimización del sistema y respaldo de datos.</p>
+        <div class="service-tags"><span class="tag">Limpieza</span><span class="tag">Antivirus</span><span class="tag">Backup</span></div>
+        <div class="price-tag">Desde $12.000 CLP</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATÁLOGO -->
+<section id="catalogo">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">// Tienda</div>
+      <h2 class="section-title">Accesorios y productos</h2>
+      <p class="section-desc">Contamos con stock de accesorios originales y compatibles para tu dispositivo.</p>
+    </div>
+    <div class="catalog-grid" id="catalog-grid">
+      <div class="product-card reveal"><span class="product-emoji">🔌</span><div class="product-name">Cargadores originales</div><div class="product-price">Desde $8.000</div><div class="product-stock">✓ En stock</div></div>
+      <div class="product-card reveal"><span class="product-emoji">🎧</span><div class="product-name">Audífonos Bluetooth</div><div class="product-price">Desde $12.000</div><div class="product-stock">✓ En stock</div></div>
+      <div class="product-card reveal"><span class="product-emoji">📱</span><div class="product-name">Fundas y protectores</div><div class="product-price">Desde $3.000</div><div class="product-stock">✓ En stock</div></div>
+      <div class="product-card reveal"><span class="product-emoji">🔋</span><div class="product-name">Baterías originales</div><div class="product-price">Desde $15.000</div><div class="product-stock">✓ En stock</div></div>
+      <div class="product-card reveal"><span class="product-emoji">💾</span><div class="product-name">Memorias y pendrives</div><div class="product-price">Desde $6.000</div><div class="product-stock">✓ En stock</div></div>
+      <div class="product-card reveal"><span class="product-emoji">🖥️</span><div class="product-name">Pantallas de repuesto</div><div class="product-price">Desde $20.000</div><div class="product-stock">Consultar</div></div>
+    </div>
+    <div style="text-align:center;margin-top:32px">
+      <a href="https://wa.me/56979726434?text=Hola, consulto por disponibilidad de accesorios" class="btn-secondary" target="_blank">Ver catálogo completo por WhatsApp →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SEGUIMIENTO -->
+<section id="seguimiento">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">// Rastreo en línea</div>
+      <h2 class="section-title">¿Cómo va tu equipo?</h2>
+      <p class="section-desc">Ingresa tu número de orden y consulta el estado de tu reparación en tiempo real.</p>
+    </div>
+    <div class="tracking-card reveal">
+      <div class="live-badge"><span class="live-dot"></span>SISTEMA EN LÍNEA — TIEMPO REAL</div>
+      <p style="font-size:13px;color:var(--t2)">Encuentra tu N° de orden en el comprobante que te entregamos al dejar tu equipo.</p>
+      <div class="tracking-input-row">
+        <input type="text" class="tracking-input" id="orden-num" placeholder="Ej: OS-250501-1234" onkeydown="if(event.key==='Enter')buscarOrden()">
+        <button class="tracking-btn" onclick="buscarOrden()">🔍 Buscar</button>
+      </div>
+      <div class="tracking-error" id="track-error">No encontramos esa orden. Verifica el número e intenta nuevamente.</div>
+      <div class="tracking-result" id="track-result"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section id="testimonios">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">// Lo que dicen nuestros clientes</div>
+      <h2 class="section-title">Opiniones reales</h2>
+    </div>
+    <div class="testimonios-grid">
+      <div class="testimonio-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonio-text">Llevé mi iPhone 13 con la pantalla quebrada y en menos de 2 horas quedó como nuevo. Excelente atención y precio justo.</p>
+        <div class="testimonio-author"><div class="author-avatar">M</div><div><div class="author-name">María González</div><div class="author-service">Cambio de pantalla iPhone 13</div></div></div>
+      </div>
+      <div class="testimonio-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonio-text">Mi laptop Dell llevaba meses lenta y con virus. La dejé y al día siguiente estaba como recién comprada. 100% recomendados.</p>
+        <div class="testimonio-author"><div class="author-avatar">C</div><div><div class="author-name">Carlos Muñoz</div><div class="author-service">Formateo y optimización laptop</div></div></div>
+      </div>
+      <div class="testimonio-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonio-text">Liberaron mi Samsung en 30 minutos. Súper rápido, amables y el precio más bajo que encontré en Curicó.</p>
+        <div class="testimonio-author"><div class="author-avatar">A</div><div><div class="author-name">Andrea Pérez</div><div class="author-service">Liberación Samsung</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG / CONSEJOS -->
+<section id="blog">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">// Consejos tech</div>
+      <h2 class="section-title">Blog de tecnología</h2>
+      <p class="section-desc">Tips y consejos para cuidar mejor tus dispositivos.</p>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card reveal">
+        <div class="blog-img">🔋</div>
+        <div class="blog-content">
+          <div class="blog-tag">BATERÍA</div>
+          <div class="blog-title">5 hábitos que están dañando la batería de tu celular</div>
+          <p class="blog-excerpt">Evita dejarla cargar toda la noche, no la descargues al 0% y mantén la temperatura estable...</p>
+          <div class="blog-meta"><span>15 Abr 2025</span><span style="color:var(--acc)">Leer más →</span></div>
+        </div>
+      </div>
+      <div class="blog-card reveal">
+        <div class="blog-img">🛡️</div>
+        <div class="blog-content">
+          <div class="blog-tag">SEGURIDAD</div>
+          <div class="blog-title">Cómo saber si tu celular tiene un virus o malware</div>
+          <p class="blog-excerpt">Si tu celular está lento, se calienta o aparecen apps que no instalaste, puede ser una señal de alerta...</p>
+          <div class="blog-meta"><span>8 Abr 2025</span><span style="color:var(--acc)">Leer más →</span></div>
+        </div>
+      </div>
+      <div class="blog-card reveal">
+        <div class="blog-img">💧</div>
+        <div class="blog-content">
+          <div class="blog-tag">EMERGENCIAS</div>
+          <div class="blog-title">¿Tu celular cayó al agua? Haz esto inmediatamente</div>
+          <p class="blog-excerpt">No lo encendas, no lo cargues y llévalo al técnico lo antes posible. Los primeros 30 minutos son clave...</p>
+          <div class="blog-meta"><span>1 Abr 2025</span><span style="color:var(--acc)">Leer más →</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">// Encuéntranos</div>
+      <h2 class="section-title">Contacto y ubicación</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div><div class="contact-label">Dirección</div><div class="contact-value">Pasaje Diecisiete 89, Curicó<br>Región del Maule, Chile</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div><div class="contact-label">Teléfono / WhatsApp</div><div class="contact-value"><a href="https://wa.me/56979726434" target="_blank">+56 9 7972 6434</a></div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div><div class="contact-label">Horario de atención</div><div class="contact-value">Lunes a Sábado<br>10:00 — 20:00 hrs</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📸</div>
+          <div><div class="contact-label">Instagram</div><div class="contact-value"><a href="https://instagram.com/compucelsolutionsss" target="_blank">@compucelsolutionsss</a></div></div>
+        </div>
+        <a href="https://maps.google.com/?q=Pasaje+Diecisiete+89+Curico" target="_blank" class="map-placeholder">
+          <span class="map-icon">🗺️</span>
+          <strong>VER EN GOOGLE MAPS</strong>
+          <p>Pasaje Diecisiete 89, Curicó</p>
+        </a>
+      </div>
+      <div class="contact-form reveal">
+        <h3 style="font-family:var(--display);font-size:16px;color:var(--acc);margin-bottom:20px;letter-spacing:1px">ENVIAR CONSULTA</h3>
+        <div class="form-field"><label>Nombre completo</label><input type="text" id="cf-nombre" placeholder="Tu nombre"></div>
+        <div class="form-field"><label>Teléfono / WhatsApp</label><input type="tel" id="cf-tel" placeholder="+56 9 XXXX XXXX"></div>
+        <div class="form-field"><label>Tipo de equipo</label>
+          <select id="cf-equipo"><option value="">— Seleccionar —</option><option>Smartphone</option><option>Laptop</option><option>PC Escritorio</option><option>Consola</option><option>Smart TV</option><option>Otro</option></select>
+        </div>
+        <div class="form-field"><label>Descripción del problema</label><textarea id="cf-mensaje" placeholder="Cuéntanos qué le pasa a tu equipo..."></textarea></div>
+        <button class="btn-primary" style="width:100%;justify-content:center" onclick="enviarConsulta()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M11.99 0C5.376 0 .001 5.375.001 11.99c0 2.111.549 4.094 1.508 5.82L0 24l6.335-1.483A11.944 11.944 0 0 0 11.99 24C18.604 24 24 18.625 24 12.01 24 5.375 18.604 0 11.99 0zm0 21.818a9.828 9.828 0 0 1-5.01-1.374l-.36-.214-3.726.872.923-3.616-.234-.373A9.777 9.777 0 0 1 2.182 12.01c0-5.413 4.406-9.818 9.808-9.818 5.413 0 9.819 4.405 9.819 9.818 0 5.414-4.406 9.808-9.819 9.808z"/></svg>
+          Enviar por WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>COMPUCEL SOLUTIONS JM</h3>
+      <p>Servicio técnico especializado en Curicó. Reparamos tu tecnología con garantía y al mejor precio.</p>
+      <div class="social-links" style="margin-top:16px">
+        <a href="https://wa.me/56979726434" class="social-link" target="_blank">💬</a>
+        <a href="https://instagram.com/compucelsolutionsss" class="social-link" target="_blank">📸</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="#servicios">Celulares</a></li>
+        <li><a href="#servicios">Laptops y PC</a></li>
+        <li><a href="#servicios">Consolas</a></li>
+        <li><a href="#servicios">Smart TV</a></li>
+        <li><a href="#servicios">Liberaciones</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Información</h4>
+      <ul>
+        <li><a href="#seguimiento">Rastrear orden</a></li>
+        <li><a href="#catalogo">Accesorios</a></li>
+        <li><a href="#blog">Blog tech</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="https://wa.me/56979726434" target="_blank">+56 9 7972 6434</a></li>
+        <li><a href="#">Pasaje 17 #89, Curicó</a></li>
+        <li><a href="#">Lun-Sáb 10:00-20:00</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 COMPUCEL SOLUTIONS JM — Curicó, Chile</span>
+    <span style="color:var(--acc)">Hecho con ⚡ para los mejores clientes</span>
+  </div>
+</footer>
+
+<!-- WA FLOAT -->
+<a href="https://wa.me/56979726434?text=Hola, necesito información sobre sus servicios" class="wa-float" target="_blank">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M11.99 0C5.376 0 .001 5.375.001 11.99c0 2.111.549 4.094 1.508 5.82L0 24l6.335-1.483A11.944 11.944 0 0 0 11.99 24C18.604 24 24 18.625 24 12.01 24 5.375 18.604 0 11.99 0zm0 21.818a9.828 9.828 0 0 1-5.01-1.374l-.36-.214-3.726.872.923-3.616-.234-.373A9.777 9.777 0 0 1 2.182 12.01c0-5.413 4.406-9.818 9.808-9.818 5.413 0 9.819 4.405 9.819 9.818 0 5.414-4.406 9.808-9.819 9.808z"/></svg>
+</a>
+
+<!-- ADMIN BUTTON -->
+<a href="index.html" class="admin-btn">
+  <span class="admin-dot"></span>ADMIN
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ── SUPABASE ──────────────────────────────────────────────────────
+const SB_URL = 'https://juoghaddibttnleqeqwq.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp1b2doYWRkaWJ0dG5sZXFlcXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyNTU0NjgsImV4cCI6MjA5MjgzMTQ2OH0.4IQUqlO8TC982--DQor3bS_UA-Vk8abzJzTlqmFWP4U';
+const db = window.supabase.createClient(SB_URL, SB_KEY);
+
+// ── TRACKING ──────────────────────────────────────────────────────
+var STATUS_LABEL = {recibido:'Recibido',proceso:'En proceso',listo:'Listo para retirar',entregado:'Entregado'};
+var STATUS_IDX   = {recibido:0,proceso:1,listo:2,entregado:3};
+var STEPS = ['Recibido','En proceso','Listo','Entregado'];
+
+function fmtDT(d){ return d?new Date(d).toLocaleString('es-CL',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):'—'; }
+function fmtD(d){ return d?new Date(d+'T00:00').toLocaleDateString('es-CL',{day:'2-digit',month:'long',year:'numeric'}):'Por confirmar'; }
+
+async function buscarOrden(){
+  var num = document.getElementById('orden-num').value.trim().toUpperCase();
+  if(!num) return;
+  document.getElementById('track-error').style.display = 'none';
+  document.getElementById('track-result').style.display = 'none';
+  var {data,error} = await db.from('ordenes').select('*').eq('id',num).single();
+  if(error||!data){ document.getElementById('track-error').style.display='block'; return; }
+  renderTracking(data);
+}
+
+function renderTracking(o){
+  var idx = STATUS_IDX[o.status||'recibido']||0;
+  var pct = [0,33,66,100][idx];
+  var entrega = fmtD(o.fecha_entrega);
+  var stepsHtml = STEPS.map(function(s,i){
+    var cls = i<idx?'done':i===idx?'active':'';
+    return '<div class="step"><div class="step-dot '+cls+'"></div><div class="step-lbl'+(i===idx?' active':'')+'" style="font-size:10px;color:'+(i===idx?'var(--acc)':'var(--t3)')+';font-family:var(--display);letter-spacing:.5px;text-align:center;margin-top:4px">'+s+'</div></div>';
+  }).join('');
+
+  var readyBanner = '';
+  if(o.status==='listo'){
+    readyBanner = '<div style="background:rgba(0,245,212,.08);border:1px solid rgba(0,245,212,.3);border-radius:8px;padding:14px;margin-bottom:14px;text-align:center"><div style="font-size:14px;font-weight:700;color:var(--acc);margin-bottom:4px">✅ ¡Tu equipo está listo!</div><div style="font-size:12px;color:var(--t2)">📍 Pasaje Diecisiete 89, Curicó · 🕐 Lun-Sáb 10:00-20:00</div></div>';
+  }
+
+  document.getElementById('track-result').innerHTML =
+    '<div style="margin-bottom:16px">'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">'
+    +'<div style="font-family:var(--display);font-size:14px;color:var(--acc)">'+o.id+'</div>'
+    +'<span style="background:rgba(0,245,212,.1);color:var(--acc);border:1px solid rgba(0,245,212,.3);padding:3px 10px;border-radius:20px;font-size:10px;font-family:var(--display)">'+STATUS_LABEL[o.status||'recibido']+'</span>'
+    +'</div>'
+    +'<div style="display:flex;align-items:flex-end;gap:0;position:relative">'
+    +'<div style="position:absolute;top:10px;left:10%;right:10%;height:2px;background:var(--bd)"></div>'
+    +'<div style="position:absolute;top:10px;left:10%;height:2px;background:var(--acc);width:'+pct+'%;transition:width .5s"></div>'
+    +stepsHtml+'</div></div>'
+    +readyBanner
+    +'<div class="order-details">'
+    +'<div class="order-row"><span>Cliente</span><span>'+o.cliente_nombre+'</span></div>'
+    +'<div class="order-row"><span>Equipo</span><span>'+o.equipo_marca+' '+o.equipo_modelo+'</span></div>'
+    +'<div class="order-row"><span>Servicio</span><span>'+o.servicio_tipo+'</span></div>'
+    +'<div class="order-row"><span>Ingresado</span><span>'+fmtDT(o.created_at)+'</span></div>'
+    +'<div class="order-row"><span>Entrega estimada</span><span style="color:var(--acc)">'+entrega+'</span></div>'
+    +(o.costo_estimado?'<div class="order-row"><span>Costo estimado</span><span style="color:var(--gold)">'+o.costo_estimado+'</span></div>':'')
+    +'</div>'
+    +'<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">'
+    +'<a href="https://wa.me/56979726434?text=Hola, consulto por mi orden '+o.id+'" style="background:#25D366;color:#fff;border:none;padding:9px 16px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px" target="_blank">💬 Consultar por WhatsApp</a>'
+    +'</div>';
+  document.getElementById('track-result').style.display = 'block';
+}
+
+// ── CONTACTO WA ───────────────────────────────────────────────────
+function enviarConsulta(){
+  var nombre = document.getElementById('cf-nombre').value.trim();
+  var tel = document.getElementById('cf-tel').value.trim();
+  var equipo = document.getElementById('cf-equipo').value;
+  var msg = document.getElementById('cf-mensaje').value.trim();
+  if(!nombre||!msg){ alert('Por favor completa nombre y descripción del problema'); return; }
+  var txt = 'Hola COMPUCEL SOLUTIONS JM!'+'\n\nNombre: '+nombre+(tel?'\nTeléfono: '+tel:'')+(equipo?'\nEquipo: '+equipo:'')+'\n\nProblema: '+msg+'\n\nQuedo atento a su respuesta.';
+  window.open('https://wa.me/56979726434?text='+encodeURIComponent(txt),'_blank');
+}
+
+// ── MOBILE MENU ───────────────────────────────────────────────────
+function toggleMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// ── SCROLL ANIMATIONS ─────────────────────────────────────────────
+var observer = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('visible'); }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+
+// ── NAV SCROLL ────────────────────────────────────────────────────
+window.addEventListener('scroll',function(){
+  var nav = document.getElementById('navbar');
+  if(window.scrollY>50) nav.style.borderBottomColor='rgba(0,245,212,.15)';
+  else nav.style.borderBottomColor='rgba(0,245,212,.1)';
+});
+
+// ── AUTO-FILL TRACKING FROM URL ───────────────────────────────────
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var orden = params.get('orden');
+  if(orden){
+    document.getElementById('orden-num').value = orden;
+    document.getElementById('seguimiento').scrollIntoView();
+    setTimeout(buscarOrden, 500);
+  }
+})();
+</script>
+</body>
+</html>

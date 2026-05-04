@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seguimiento de Orden — COMPUCEL SOLUTIONS JM</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#07090f;--s1:#0d1117;--s2:#161b22;--s3:#1c2333;--acc:#00e5ff;--green:#10b981;--gold:#fbbf24;--red:#ef4444;--t1:#e6edf3;--t2:#8b949e;--bd:#30363d;--font:'Figtree',sans-serif;--mono:'JetBrains Mono',monospace;--display:'Syne',sans-serif}
+body{background:var(--bg);color:var(--t1);font-family:var(--font);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+.card{background:var(--s2);border:1px solid var(--bd);border-radius:16px;width:100%;max-width:520px;overflow:hidden}
+.card-header{background:linear-gradient(135deg,#08142a,#0d2040);padding:28px;text-align:center;border-bottom:1px solid var(--bd)}
+.logo-box{width:56px;height:56px;background:var(--acc);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.logo-box svg{width:30px;height:30px}
+h1{font-family:var(--display);font-size:18px;font-weight:800;color:#fff}
+h1 span{display:block;font-size:11px;color:var(--acc);font-family:var(--mono);font-weight:400;margin-top:3px}
+.card-body{padding:24px}
+.search-label{font-size:12px;font-weight:600;color:var(--t2);font-family:var(--mono);letter-spacing:1px;margin-bottom:8px;text-transform:uppercase;display:block}
+.search-row{display:flex;gap:8px}
+.search-input{flex:1;background:var(--s3);border:1px solid var(--bd);color:var(--t1);padding:11px 14px;border-radius:8px;font-size:14px;font-family:var(--mono);outline:none;transition:border-color .15s}
+.search-input:focus{border-color:var(--acc)}
+.search-input::placeholder{color:var(--t2);opacity:.6}
+.btn-buscar{background:var(--acc);color:#000;border:none;padding:11px 20px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font);white-space:nowrap;transition:filter .15s}
+.btn-buscar:hover{filter:brightness(1.1)}
+.result{margin-top:20px;display:none}
+.order-card{background:var(--s1);border:1px solid var(--bd);border-radius:12px;overflow:hidden}
+.order-top{background:linear-gradient(135deg,#08142a,#0d2040);padding:16px 20px}
+.order-top-row{display:flex;justify-content:space-between;align-items:flex-start}
+.order-id{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--acc)}
+.order-id small{display:block;font-size:9px;color:var(--t2);font-weight:400;margin-bottom:2px}
+.status-pill{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;font-family:var(--mono)}
+.s-recibido{background:rgba(0,229,255,.15);color:var(--acc);border:1px solid rgba(0,229,255,.3)}
+.s-proceso{background:rgba(251,191,36,.15);color:var(--gold);border:1px solid rgba(251,191,36,.3)}
+.s-listo{background:rgba(16,185,129,.15);color:var(--green);border:1px solid rgba(16,185,129,.3)}
+.s-entregado{background:rgba(72,79,88,.3);color:var(--t2);border:1px solid var(--bd)}
+.progress-bar{margin-top:16px;display:flex;gap:0;position:relative}
+.progress-bar::before{content:'';position:absolute;top:10px;left:10%;right:10%;height:2px;background:var(--bd);z-index:0}
+.progress-fill{position:absolute;top:10px;left:10%;height:2px;background:var(--acc);z-index:1;transition:width .5s}
+.step{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;z-index:2}
+.step-dot{width:20px;height:20px;border-radius:50%;background:var(--s3);border:2px solid var(--bd);transition:all .3s}
+.step-dot.done{background:var(--acc);border-color:var(--acc)}
+.step-dot.current{background:var(--gold);border-color:var(--gold);box-shadow:0 0 8px rgba(251,191,36,.5)}
+.step-label{font-size:9px;color:var(--t2);font-family:var(--mono);text-align:center}
+.step-label.active{color:var(--acc)}
+.order-body{padding:16px}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.info-item label{font-size:10px;color:var(--t2);font-family:var(--mono);display:block;margin-bottom:2px}
+.info-item span{font-size:13px;font-weight:600;color:var(--t1)}
+.divider{height:1px;background:var(--bd);margin:12px 0}
+.desc-box{background:var(--s3);border-left:3px solid var(--acc);border-radius:6px;padding:10px 12px;font-size:12px;color:var(--t1);line-height:1.6}
+.contact-footer{background:var(--s3);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.contact-info{font-size:11px;color:var(--t2)}
+.btn-wa{background:#25D366;color:#fff;border:none;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.error-msg{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:var(--red);padding:12px 16px;border-radius:8px;font-size:13px;text-align:center;margin-top:16px;display:none}
+.loading-msg{text-align:center;padding:20px;color:var(--t2);font-size:13px;display:none}
+.footer-note{margin-top:20px;text-align:center;font-size:12px;color:var(--t2)}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="card-header">
+    <div class="logo-box">
+      <svg viewBox="0 0 36 36" fill="none"><rect x="2" y="8" width="22" height="18" rx="3" stroke="#000" stroke-width="2.5"/><path d="M24 12h6a3 3 0 0 1 3 3v4a3 3 0 0 1-3 3h-6" stroke="#000" stroke-width="2.5"/><circle cx="13" cy="17" r="4" stroke="#000" stroke-width="2"/></svg>
+    </div>
+    <h1 id="portal-brand">COMPUCEL SOLUTIONS JM<span id="portal-slogan">SEGUIMIENTO DE ORDEN EN LÍNEA</span></h1>
+  </div>
+  <div class="card-body">
+    <label class="search-label">Ingresa tu N° de orden</label>
+    <div class="search-row">
+      <input type="text" class="search-input" id="orden-input" placeholder="Ej: OS-250427-1234" onkeydown="if(event.key==='Enter')buscarOrden()">
+      <button class="btn-buscar" onclick="buscarOrden()">Buscar →</button>
+    </div>
+    <div class="loading-msg" id="loading">⏳ Buscando tu orden...</div>
+    <div class="error-msg" id="error-msg">No encontramos una orden con ese número. Verifica e intenta nuevamente.</div>
+    <div class="result" id="result"></div>
+  </div>
+</div>
+<div class="footer-note">Powered by <strong>COMPUCEL SOLUTIONS JM</strong></div>
+
+<script>
+const SB_URL = 'https://juoghaddibttnleqeqwq.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp1b2doYWRkaWJ0dG5sZXFlcXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyNTU0NjgsImV4cCI6MjA5MjgzMTQ2OH0.4IQUqlO8TC982--DQor3bS_UA-Vk8abzJzTlqmFWP4U';
+const db = window.supabase.createClient(SB_URL, SB_KEY);
+
+const STATUS_LABEL = {recibido:'Recibido',proceso:'En proceso',listo:'Listo para retirar',entregado:'Entregado'};
+const STATUS_STEPS = {recibido:0,proceso:1,listo:2,entregado:3};
+const STEPS = ['Recibido','En proceso','Listo','Entregado'];
+
+function fmtDT(d){ return d?new Date(d).toLocaleString('es-CL',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):'—'; }
+function fmtD(d){ return d?new Date(d+'T00:00').toLocaleDateString('es-CL',{day:'2-digit',month:'long',year:'numeric'}):'Por confirmar'; }
+
+async function loadConfig(){
+  const {data} = await db.from('config').select('*');
+  if(!data) return;
+  var cfg = {};
+  data.forEach(function(r){ cfg[r.clave]=r.valor; });
+  if(cfg.nombre_negocio) document.getElementById('portal-brand').childNodes[0].textContent = cfg.nombre_negocio;
+  if(cfg.telefono) window._cfg_tel = cfg.telefono;
+  if(cfg.horario) window._cfg_horario = cfg.horario;
+  if(cfg.direccion) window._cfg_dir = cfg.direccion;
+}
+
+async function buscarOrden(){
+  var num = document.getElementById('orden-input').value.trim().toUpperCase();
+  if(!num){ return; }
+  document.getElementById('loading').style.display='block';
+  document.getElementById('error-msg').style.display='none';
+  document.getElementById('result').style.display='none';
+
+  var {data,error} = await db.from('ordenes').select('*').eq('id',num).single();
+  document.getElementById('loading').style.display='none';
+
+  if(error||!data){
+    document.getElementById('error-msg').style.display='block';
+    return;
+  }
+  renderOrden(data);
+}
+
+function renderOrden(o){
+  var stepIdx = STATUS_STEPS[o.status||'recibido']||0;
+  var fillPct = [0,33,66,100][stepIdx];
+  var entrega = fmtD(o.fecha_entrega);
+
+  var stepsHtml = STEPS.map(function(s,i){
+    var cls = i<stepIdx?'done':i===stepIdx?'current':'';
+    var labelCls = i===stepIdx?'active':'';
+    return '<div class="step"><div class="step-dot '+cls+'"></div><div class="step-label '+labelCls+'">'+s+'</div></div>';
+  }).join('');
+
+  var statusCls = 's-'+(o.status||'recibido');
+  var statusLabel = STATUS_LABEL[o.status||'recibido']||'Recibido';
+  var tel = (window._cfg_tel||'+56 9 7972 6434').replace(/\D/g,'');
+  var horario = window._cfg_horario||'Lunes a Sábado 10:00-20:00';
+  var dir = window._cfg_dir||'Pasaje Diecisiete 89, Curicó';
+
+  var readyMsg = '';
+  if(o.status==='listo'){
+    readyMsg = '<div style="background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:8px;padding:12px 14px;margin-bottom:12px;text-align:center">'
+      +'<div style="font-size:14px;font-weight:700;color:#10b981;margin-bottom:4px">✅ ¡Tu equipo está listo!</div>'
+      +'<div style="font-size:12px;color:var(--t2)">📍 '+dir+'</div>'
+      +'<div style="font-size:12px;color:var(--t2)">🕐 '+horario+'</div>'
+      +'</div>';
+  }
+
+  document.getElementById('result').innerHTML =
+    '<div class="order-card">'
+    +'<div class="order-top">'
+    +'<div class="order-top-row">'
+    +'<div class="order-id"><small>N° DE ORDEN</small>'+o.id+'</div>'
+    +'<span class="status-pill '+statusCls+'">'+statusLabel+'</span>'
+    +'</div>'
+    +'<div class="progress-bar" style="margin-top:16px">'
+    +'<div class="progress-fill" style="width:'+fillPct+'%"></div>'
+    +stepsHtml
+    +'</div></div>'
+    +'<div class="order-body">'
+    +readyMsg
+    +'<div class="info-grid">'
+    +'<div class="info-item"><label>Cliente</label><span>'+o.cliente_nombre+'</span></div>'
+    +'<div class="info-item"><label>Equipo</label><span>'+o.equipo_marca+' '+o.equipo_modelo+'</span></div>'
+    +'<div class="info-item"><label>Servicio</label><span>'+o.servicio_tipo+'</span></div>'
+    +'<div class="info-item"><label>Entrega estimada</label><span style="color:var(--acc)">'+entrega+'</span></div>'
+    +(o.costo_estimado?'<div class="info-item"><label>Costo estimado</label><span style="color:var(--gold)">'+o.costo_estimado+'</span></div>':'')
+    +(o.tecnico?'<div class="info-item"><label>Técnico</label><span>'+o.tecnico+'</span></div>':'')
+    +'</div>'
+    +(o.servicio_descripcion?'<div class="divider"></div><div class="desc-box">'+o.servicio_descripcion+'</div>':'')
+    +'</div>'
+    +'<div style="padding:12px 16px;background:var(--s3);border-top:1px solid var(--bd);display:flex;align-items:center;gap:12px">'
+    +'<div id="order-qr-'+o.id+'" style="background:#0d1117;border-radius:6px;padding:4px;flex-shrink:0"></div>'
+    +'<div><div style="font-size:10px;font-weight:700;color:var(--acc);font-family:var(--mono);margin-bottom:2px">LINK DE SEGUIMIENTO</div>'
+    +'<div style="font-size:10px;color:var(--t2);font-family:var(--mono);word-break:break-all">'+window.location.href.split('?')[0]+'?orden='+o.id+'</div>'
+    +'<div style="font-size:10px;color:var(--t2);margin-top:2px">Guarda este QR para consultar el estado</div></div>'
+    +'</div>'
+    +'<div class="contact-footer">'
+    +'<div class="contact-info">¿Dudas? Contáctanos</div>'
+    +'<a class="btn-wa" href="https://wa.me/'+tel+'?text=Hola, consulto por mi orden '+o.id+'" target="_blank">'
+    +'<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M11.99 0C5.376 0 .001 5.375.001 11.99c0 2.111.549 4.094 1.508 5.82L0 24l6.335-1.483A11.944 11.944 0 0 0 11.99 24C18.604 24 24 18.625 24 12.01 24 5.375 18.604 0 11.99 0zm0 21.818a9.828 9.828 0 0 1-5.01-1.374l-.36-.214-3.726.872.923-3.616-.234-.373A9.777 9.777 0 0 1 2.182 12.01c0-5.413 4.406-9.818 9.808-9.818 5.413 0 9.819 4.405 9.819 9.818 0 5.414-4.406 9.808-9.819 9.808z"/></svg>'
+    +' Contactar por WhatsApp</a>'
+    +'</div></div>';
+
+  document.getElementById('result').style.display='block';
+  // Generate QR for tracking link
+  setTimeout(function(){
+    var qrDiv = document.getElementById('order-qr-'+o.id);
+    if(qrDiv){
+      var currentUrl = window.location.href.split('?')[0]+'?orden='+o.id;
+      var qrImgUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=80x80&data='+encodeURIComponent(currentUrl)+'&bgcolor=0d1117&color=00e5ff&margin=2';
+      qrDiv.innerHTML = '<img src="'+qrImgUrl+'" width="80" height="80" style="border-radius:6px;display:block" alt="QR Seguimiento">';
+    }
+  }, 300);
+}
+
+loadConfig();
+// Auto-fill from URL param
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var orden = params.get('orden');
+  if(orden){
+    document.getElementById('orden-input').value = orden;
+    setTimeout(buscarOrden, 800);
+  }
+})();
+</script>
+</body>
+</html>
