@@ -3,6 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#00e5ff">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="COMPUCEL">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
 <title>COMPUCEL SOLUTIONS JM — Sistema v2.0</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -327,11 +336,15 @@ td{padding:11px 16px;font-size:13px}
       </button>
     </nav>
     <div class="sidebar-user">
-      <div style="margin-bottom:8px">
+      <div style="margin-bottom:8px;display:flex;flex-direction:column;gap:6px">
         <a href="index.html" style="display:flex;align-items:center;gap:6px;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.15);border-radius:6px;padding:7px 10px;text-decoration:none;color:var(--acc);font-size:11px;font-family:var(--mono);letter-spacing:1px;transition:all .15s" target="_blank">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.3"/><path d="M6 1C6 1 4 3 4 6s2 5 2 5M6 1c0 0 2 2 2 5s-2 5-2 5M1 6h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
           VER SITIO WEB
         </a>
+        <button id="pwa-install-btn" onclick="instalarApp()" style="display:none;align-items:center;gap:6px;background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.3);border-radius:6px;padding:7px 10px;color:var(--acc2);font-size:11px;font-family:var(--mono);letter-spacing:1px;cursor:pointer;transition:all .15s;width:100%">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M1 9v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          INSTALAR APP
+        </button>
       </div>
       <div class="user-row">
         <div class="user-avatar" id="user-av">A</div>
@@ -502,6 +515,7 @@ td{padding:11px 16px;font-size:13px}
           <button class="admin-tab" onclick="showAdminTab('whatsapp')" id="atab-whatsapp">💬 WhatsApp</button>
           <button class="admin-tab" onclick="showAdminTab('usuarios')" id="atab-usuarios">👥 Usuarios</button>
           <button class="admin-tab" onclick="showAdminTab('recordatorios')" id="atab-recordatorios">⏰ Recordatorios</button>
+          <button class="admin-tab" onclick="showAdminTab('web')" id="atab-web">🌐 Web Pública</button>
         </div>
 
         <!-- TAB: MARCA -->
@@ -630,6 +644,114 @@ td{padding:11px 16px;font-size:13px}
             <h3>👥 Usuarios del sistema</h3>
             <div id="users-list" style="margin-bottom:16px"></div>
             <button class="btn btn-secondary btn-sm" onclick="showAddUser()">+ Agregar usuario</button>
+          </div>
+        </div>
+
+        <!-- TAB: WEB PÚBLICA -->
+        <div id="aview-web" style="display:none">
+          <!-- Sub-tabs web -->
+          <div style="display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap">
+            <button class="admin-tab active" onclick="showWebTab('hero')" id="wtab-hero">🏠 Hero</button>
+            <button class="admin-tab" onclick="showWebTab('secciones')" id="wtab-secciones">👁 Secciones</button>
+            <button class="admin-tab" onclick="showWebTab('servicios-web')" id="wtab-servicios-web">🛠 Servicios</button>
+            <button class="admin-tab" onclick="showWebTab('catalogo-web')" id="wtab-catalogo-web">📦 Catálogo</button>
+            <button class="admin-tab" onclick="showWebTab('testimonios-web')" id="wtab-testimonios-web">⭐ Testimonios</button>
+            <button class="admin-tab" onclick="showWebTab('blog-web')" id="wtab-blog-web">📝 Blog</button>
+            <button class="admin-tab" onclick="showWebTab('preview-web')" id="wtab-preview-web">👁‍🗨 Vista previa</button>
+          </div>
+
+          <!-- HERO -->
+          <div id="wview-hero">
+            <div class="admin-card">
+              <h3>🏠 Sección Hero (Portada)</h3>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                <div class="field form-full"><label>Título principal</label><input type="text" id="wh-titulo" placeholder="Tu tecnología en las mejores manos"></div>
+                <div class="field form-full"><label>Descripción / subtítulo</label><textarea id="wh-descripcion" style="min-height:60px" placeholder="Reparación profesional de celulares..."></textarea></div>
+                <div class="field"><label>Estadística 1 (ej: 500+)</label><input type="text" id="wh-stat1" placeholder="500+"></div>
+                <div class="field"><label>Label estadística 1</label><input type="text" id="wh-stat1-lbl" placeholder="Equipos reparados"></div>
+                <div class="field"><label>Estadística 2 (ej: 5★)</label><input type="text" id="wh-stat2" placeholder="5★"></div>
+                <div class="field"><label>Label estadística 2</label><input type="text" id="wh-stat2-lbl" placeholder="Calificación"></div>
+                <div class="field"><label>Estadística 3 (ej: 24h)</label><input type="text" id="wh-stat3" placeholder="24h"></div>
+                <div class="field"><label>Label estadística 3</label><input type="text" id="wh-stat3-lbl" placeholder="Tiempo promedio"></div>
+                <div class="field form-full"><label>Texto botón principal</label><input type="text" id="wh-btn1" placeholder="Cotizar ahora"></div>
+              </div>
+              <button class="btn btn-primary btn-sm" style="margin-top:14px" onclick="saveHero()">💾 Guardar hero</button>
+            </div>
+          </div>
+
+          <!-- SECCIONES -->
+          <div id="wview-secciones" style="display:none">
+            <div class="admin-card">
+              <h3>👁 Mostrar / Ocultar Secciones</h3>
+              <p style="font-size:12px;color:var(--t2);margin-bottom:16px">Activa o desactiva cada sección de la web pública.</p>
+              <div style="display:flex;flex-direction:column;gap:10px" id="secciones-list">
+                ${['servicios','catalogo','seguimiento','testimonios','blog','contacto'].map(s=>
+                  `<div style="display:flex;align-items:center;justify-content:space-between;background:var(--s3);border:1px solid var(--bd);border-radius:var(--r);padding:12px 16px">
+                    <span style="font-size:13px;font-weight:600">${{servicios:'🛠️ Servicios',catalogo:'📦 Catálogo',seguimiento:'🔍 Seguimiento de órdenes',testimonios:'⭐ Testimonios',blog:'📝 Blog / Consejos',contacto:'📍 Contacto'}[s]}</span>
+                    <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+                      <span style="font-size:12px;color:var(--t2)">Visible</span>
+                      <input type="checkbox" id="sec-${s}" checked style="accent-color:var(--acc);width:16px;height:16px">
+                    </label>
+                  </div>`
+                ).join('')}
+              </div>
+              <button class="btn btn-primary btn-sm" style="margin-top:16px" onclick="saveSecciones()">💾 Guardar secciones</button>
+            </div>
+          </div>
+
+          <!-- SERVICIOS WEB -->
+          <div id="wview-servicios-web" style="display:none">
+            <div class="admin-card">
+              <h3>🛠️ Servicios de la Web</h3>
+              <div id="web-servicios-list" style="margin-bottom:16px"></div>
+              <button class="btn btn-primary btn-sm" onclick="showAddWebServicio()">+ Agregar servicio</button>
+            </div>
+          </div>
+
+          <!-- CATÁLOGO WEB -->
+          <div id="wview-catalogo-web" style="display:none">
+            <div class="admin-card">
+              <h3>📦 Catálogo de Accesorios</h3>
+              <div id="web-catalogo-list" style="margin-bottom:16px"></div>
+              <button class="btn btn-primary btn-sm" onclick="showAddWebCatalogo()">+ Agregar producto</button>
+            </div>
+          </div>
+
+          <!-- TESTIMONIOS WEB -->
+          <div id="wview-testimonios-web" style="display:none">
+            <div class="admin-card">
+              <h3>⭐ Testimonios de Clientes</h3>
+              <div id="web-testimonios-list" style="margin-bottom:16px"></div>
+              <button class="btn btn-primary btn-sm" onclick="showAddTestimonio()">+ Agregar testimonio</button>
+            </div>
+          </div>
+
+          <!-- BLOG WEB -->
+          <div id="wview-blog-web" style="display:none">
+            <div class="admin-card">
+              <h3>📝 Artículos del Blog</h3>
+              <div id="web-blog-list" style="margin-bottom:16px"></div>
+              <button class="btn btn-primary btn-sm" onclick="showAddBlog()">+ Agregar artículo</button>
+            </div>
+          </div>
+
+          <!-- VISTA PREVIA -->
+          <div id="wview-preview-web" style="display:none">
+            <div class="admin-card">
+              <h3>👁‍🗨 Vista previa de la web</h3>
+              <p style="font-size:12px;color:var(--t2);margin-bottom:14px">Haz clic en "Abrir web" para ver los cambios en vivo.</p>
+              <div style="display:flex;gap:8px;margin-bottom:16px">
+                <button class="btn btn-primary btn-sm" onclick="window.open('index.html','_blank')">🌐 Abrir web pública</button>
+                <button class="btn btn-secondary btn-sm" onclick="window.open('portal.html','_blank')">🔍 Abrir portal cliente</button>
+              </div>
+              <div style="background:var(--s3);border:1px solid var(--bd);border-radius:var(--r2);overflow:hidden">
+                <div style="background:var(--s2);padding:8px 12px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--bd)">
+                  <div style="display:flex;gap:5px"><div style="width:10px;height:10px;border-radius:50%;background:#ff5f57"></div><div style="width:10px;height:10px;border-radius:50%;background:#febc2e"></div><div style="width:10px;height:10px;border-radius:50%;background:#28c840"></div></div>
+                  <div style="font-size:11px;color:var(--t2);font-family:var(--mono)">index.html — Sitio web público</div>
+                </div>
+                <iframe src="index.html" style="width:100%;height:500px;border:none;transform:scale(0.8);transform-origin:top left;width:125%;height:625px" id="web-preview-frame"></iframe>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -947,6 +1069,107 @@ td{padding:11px 16px;font-size:13px}
 </div>
 
 
+
+<!-- MODAL: Web Servicio -->
+<div class="modal-overlay" id="modal-web-servicio" style="display:none">
+  <div class="modal">
+    <div class="modal-head"><h3 id="ws-modal-title">Nuevo Servicio Web</h3><button class="close-btn" onclick="closeModal('modal-web-servicio')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="field"><label>Ícono (emoji)</label><input type="text" id="ws-icono" placeholder="📱" maxlength="4" style="font-size:24px;text-align:center"></div>
+        <div class="field"><label>Nombre *</label><input type="text" id="ws-nombre" placeholder="SMARTPHONES"></div>
+        <div class="field form-full"><label>Descripción</label><textarea id="ws-descripcion" style="min-height:80px" placeholder="Descripción del servicio..."></textarea></div>
+        <div class="field form-full"><label>Tags (separados por comas)</label><input type="text" id="ws-tags" placeholder="Samsung,iPhone,Xiaomi,Motorola"></div>
+        <div class="field"><label>Precio desde</label><input type="text" id="ws-precio" placeholder="Desde $15.000 CLP"></div>
+        <div class="field"><label>Orden</label><input type="number" id="ws-orden" placeholder="1" min="1"></div>
+        <div class="field"><label>Estado</label>
+          <select id="ws-activo"><option value="true">✓ Activo (visible)</option><option value="false">✗ Oculto</option></select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-web-servicio')">Cancelar</button>
+      <button class="btn btn-danger btn-sm" id="ws-delete-btn" style="margin-right:auto;display:none" onclick="deleteWebItem('web_servicios')">🗑️ Eliminar</button>
+      <button class="btn btn-primary" onclick="saveWebServicio()">💾 Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Web Catálogo -->
+<div class="modal-overlay" id="modal-web-catalogo" style="display:none">
+  <div class="modal">
+    <div class="modal-head"><h3 id="wc-modal-title">Nuevo Producto</h3><button class="close-btn" onclick="closeModal('modal-web-catalogo')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="field"><label>Ícono (emoji)</label><input type="text" id="wc-icono" placeholder="📦" maxlength="4" style="font-size:24px;text-align:center"></div>
+        <div class="field"><label>Nombre *</label><input type="text" id="wc-nombre" placeholder="Cargadores originales"></div>
+        <div class="field"><label>Precio</label><input type="text" id="wc-precio" placeholder="Desde $8.000"></div>
+        <div class="field"><label>Disponibilidad</label><input type="text" id="wc-stock" placeholder="✓ En stock"></div>
+        <div class="field"><label>Orden</label><input type="number" id="wc-orden" placeholder="1"></div>
+        <div class="field"><label>Estado</label>
+          <select id="wc-activo"><option value="true">✓ Activo</option><option value="false">✗ Oculto</option></select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-web-catalogo')">Cancelar</button>
+      <button class="btn btn-danger btn-sm" id="wc-delete-btn" style="margin-right:auto;display:none" onclick="deleteWebItem('web_catalogo')">🗑️ Eliminar</button>
+      <button class="btn btn-primary" onclick="saveWebCatalogo()">💾 Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Testimonio -->
+<div class="modal-overlay" id="modal-testimonio" style="display:none">
+  <div class="modal">
+    <div class="modal-head"><h3 id="wt-modal-title">Nuevo Testimonio</h3><button class="close-btn" onclick="closeModal('modal-testimonio')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="field"><label>Nombre del cliente *</label><input type="text" id="wt-nombre" placeholder="María González"></div>
+        <div class="field"><label>Inicial (letra avatar)</label><input type="text" id="wt-inicial" placeholder="M" maxlength="2"></div>
+        <div class="field form-full"><label>Servicio recibido</label><input type="text" id="wt-servicio" placeholder="Cambio de pantalla iPhone 13"></div>
+        <div class="field form-full"><label>Testimonio *</label><textarea id="wt-texto" style="min-height:100px" placeholder="El testimonio del cliente..."></textarea></div>
+        <div class="field"><label>Estrellas</label>
+          <select id="wt-estrellas"><option value="5">★★★★★ (5)</option><option value="4">★★★★☆ (4)</option><option value="3">★★★☆☆ (3)</option></select>
+        </div>
+        <div class="field"><label>Orden</label><input type="number" id="wt-orden" placeholder="1"></div>
+        <div class="field"><label>Estado</label>
+          <select id="wt-activo"><option value="true">✓ Activo</option><option value="false">✗ Oculto</option></select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-testimonio')">Cancelar</button>
+      <button class="btn btn-danger btn-sm" id="wt-delete-btn" style="margin-right:auto;display:none" onclick="deleteWebItem('web_testimonios')">🗑️ Eliminar</button>
+      <button class="btn btn-primary" onclick="saveTestimonio()">💾 Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Blog -->
+<div class="modal-overlay" id="modal-blog" style="display:none">
+  <div class="modal">
+    <div class="modal-head"><h3 id="wb-modal-title">Nuevo Artículo</h3><button class="close-btn" onclick="closeModal('modal-blog')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="field"><label>Emoji</label><input type="text" id="wb-emoji" placeholder="📱" maxlength="4" style="font-size:24px;text-align:center"></div>
+        <div class="field"><label>Categoría</label><input type="text" id="wb-categoria" placeholder="BATERÍA"></div>
+        <div class="field form-full"><label>Título *</label><input type="text" id="wb-titulo" placeholder="Título del artículo"></div>
+        <div class="field form-full"><label>Extracto (resumen)</label><textarea id="wb-extracto" style="min-height:80px" placeholder="Resumen corto del artículo..."></textarea></div>
+        <div class="field form-full"><label>Contenido completo (opcional)</label><textarea id="wb-contenido" style="min-height:100px" placeholder="Contenido completo..."></textarea></div>
+        <div class="field"><label>Orden</label><input type="number" id="wb-orden" placeholder="1"></div>
+        <div class="field"><label>Estado</label>
+          <select id="wb-activo"><option value="true">✓ Activo</option><option value="false">✗ Oculto</option></select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-blog')">Cancelar</button>
+      <button class="btn btn-danger btn-sm" id="wb-delete-btn" style="margin-right:auto;display:none" onclick="deleteWebItem('web_blog')">🗑️ Eliminar</button>
+      <button class="btn btn-primary" onclick="saveBlog()">💾 Guardar</button>
+    </div>
+  </div>
+</div>
 
 <!-- MODAL: Usuario -->
 <div class="modal-overlay" id="modal-user" style="display:none">
@@ -1404,7 +1627,9 @@ async function imprimirVenta(ventaId){
     + '<hr><p class="total">TOTAL: <span style="float:right">'+fmt(v.total)+'</span></p>'
     + '<p>Pago: '+v.metodo_pago+'</p><hr>'
     + '<p style="text-align:center">Gracias por su compra!</p>'
-    + '<scr'+'ipt>window.print();window.close();<'+'/scr'+'ipt></body></html>';
+    + '<scr'+'ipt>window.print();window.close();<'+'/scr'+'ipt>
+
+</body></html>';
   const w = window.open('','_blank');
   w.document.write(html);
 }
@@ -1787,7 +2012,9 @@ function imprimirOrden(id){
     +'</div></div>'
     +'</div>'
     +'<scr'+'ipt>window.onload=function(){window.print();}<'+'/scr'+'ipt>'
-    +'</body></html>';
+    +'
+
+</body></html>';
 
   var w = window.open('','_blank','width=800,height=600');
   w.document.open();
@@ -2007,6 +2234,345 @@ async function testRecordatorio(){
     + 'Alertara si una orden lleva mas de '+recConfig.dias+' dias sin actualizar.';
   await fetch('https://api.callmebot.com/whatsapp.php?phone='+CB_PHONE+'&text='+msgTxt+'&apikey='+CB_KEY, {mode:'no-cors'});
   toast('Prueba enviada', 'Revisa tu WhatsApp en segundos', 'info');
+}
+
+
+// ══════════════════════════════════════════════════════════════════
+// ── MÓDULO WEB PÚBLICA — CONTROL TOTAL ───────────────────────────
+// ══════════════════════════════════════════════════════════════════
+var currentWebEditId = null;
+var currentWebEditTable = null;
+
+// ── WEB SUB-TABS ──────────────────────────────────────────────────
+function showWebTab(name){
+  var tabs = ['hero','secciones','servicios-web','catalogo-web','testimonios-web','blog-web','preview-web'];
+  tabs.forEach(function(t){
+    var v = document.getElementById('wview-'+t);
+    var b = document.getElementById('wtab-'+t);
+    if(v) v.style.display = t===name?'block':'none';
+    if(b) b.classList.toggle('active', t===name);
+  });
+  if(name==='hero') loadHeroConfig();
+  if(name==='secciones') loadSecciones();
+  if(name==='servicios-web') loadWebServicios();
+  if(name==='catalogo-web') loadWebCatalogo();
+  if(name==='testimonios-web') loadWebTestimonios();
+  if(name==='blog-web') loadWebBlog();
+}
+
+// ── HERO ──────────────────────────────────────────────────────────
+async function loadHeroConfig(){
+  var fields = {
+    'hero_titulo':'wh-titulo',
+    'hero_descripcion':'wh-descripcion',
+    'hero_stats_reparaciones':'wh-stat1',
+    'hero_stats_reparaciones_lbl':'wh-stat1-lbl',
+    'hero_stats_calificacion':'wh-stat2',
+    'hero_stats_calificacion_lbl':'wh-stat2-lbl',
+    'hero_stats_tiempo':'wh-stat3',
+    'hero_stats_tiempo_lbl':'wh-stat3-lbl',
+    'hero_btn1':'wh-btn1'
+  };
+  var defaults = {
+    'hero_titulo':'Tu tecnología en las mejores manos',
+    'hero_descripcion':'Reparación profesional de celulares, laptops, PC, consolas y Smart TV.',
+    'hero_stats_reparaciones':'500+','hero_stats_reparaciones_lbl':'Equipos reparados',
+    'hero_stats_calificacion':'5★','hero_stats_calificacion_lbl':'Calificación',
+    'hero_stats_tiempo':'24h','hero_stats_tiempo_lbl':'Tiempo promedio',
+    'hero_btn1':'Cotizar ahora'
+  };
+  Object.keys(fields).forEach(function(clave){
+    var el = document.getElementById(fields[clave]);
+    if(el) el.value = cfg[clave] || defaults[clave] || '';
+  });
+}
+
+async function saveHero(){
+  var updates = [
+    {clave:'hero_titulo', id:'wh-titulo'},
+    {clave:'hero_descripcion', id:'wh-descripcion'},
+    {clave:'hero_stats_reparaciones', id:'wh-stat1'},
+    {clave:'hero_stats_reparaciones_lbl', id:'wh-stat1-lbl'},
+    {clave:'hero_stats_calificacion', id:'wh-stat2'},
+    {clave:'hero_stats_calificacion_lbl', id:'wh-stat2-lbl'},
+    {clave:'hero_stats_tiempo', id:'wh-stat3'},
+    {clave:'hero_stats_tiempo_lbl', id:'wh-stat3-lbl'},
+    {clave:'hero_btn1', id:'wh-btn1'}
+  ];
+  for(var u of updates){
+    var el = document.getElementById(u.id);
+    if(!el) continue;
+    var val = el.value.trim();
+    await db.from('config').upsert({clave:u.clave, valor:val},{onConflict:'clave'});
+    cfg[u.clave] = val;
+  }
+  toast('Hero actualizado','Los cambios se verán en la web al recargar');
+}
+
+// ── SECCIONES ─────────────────────────────────────────────────────
+async function loadSecciones(){
+  var secciones = ['servicios','catalogo','seguimiento','testimonios','blog','contacto'];
+  secciones.forEach(function(s){
+    var cb = document.getElementById('sec-'+s);
+    if(cb) cb.checked = cfg['web_seccion_'+s] !== 'false';
+  });
+}
+
+async function saveSecciones(){
+  var secciones = ['servicios','catalogo','seguimiento','testimonios','blog','contacto'];
+  for(var s of secciones){
+    var cb = document.getElementById('sec-'+s);
+    var val = cb && cb.checked ? 'true' : 'false';
+    await db.from('config').upsert({clave:'web_seccion_'+s, valor:val},{onConflict:'clave'});
+    cfg['web_seccion_'+s] = val;
+  }
+  toast('Secciones guardadas','Los cambios se verán en la web al recargar');
+}
+
+// ── SERVICIOS WEB ─────────────────────────────────────────────────
+async function loadWebServicios(){
+  var {data} = await db.from('web_servicios').select('*').order('orden');
+  var el = document.getElementById('web-servicios-list');
+  if(!el) return;
+  if(!data||!data.length){ el.innerHTML='<div class="empty"><p>Sin servicios. Agrega el primero.</p></div>'; return; }
+  el.innerHTML = '<div style="display:flex;flex-direction:column;gap:8px">'+data.map(function(s){
+    return '<div style="display:flex;align-items:center;gap:12px;background:var(--s3);border:1px solid var(--bd);border-radius:var(--r);padding:12px 14px">'
+      +'<span style="font-size:28px;flex-shrink:0">'+s.icono+'</span>'
+      +'<div style="flex:1">'
+      +'<div style="font-size:13px;font-weight:700">'+s.nombre+'</div>'
+      +'<div style="font-size:11px;color:var(--t2)">'+s.precio_desde+'</div>'
+      +'</div>'
+      +'<span class="badge '+(s.activo?'b-listo':'b-entregado')+'">'+(s.activo?'Activo':'Oculto')+'</span>'
+      +'<button class="btn btn-ghost btn-sm" onclick="editWebServicio("+s.id+")">✏️ Editar</button>'
+      +'</div>';
+  }).join('')+'</div>';
+}
+
+function showAddWebServicio(){
+  currentWebEditId=null; currentWebEditTable='web_servicios';
+  document.getElementById('ws-modal-title').textContent='Nuevo Servicio Web';
+  document.getElementById('ws-delete-btn').style.display='none';
+  ['ws-icono','ws-nombre','ws-descripcion','ws-tags','ws-precio','ws-orden'].forEach(function(id){
+    var el=document.getElementById(id); if(el) el.value='';
+  });
+  document.getElementById('ws-activo').value='true';
+  openModal('modal-web-servicio');
+}
+
+async function editWebServicio(id){
+  var {data:s} = await db.from('web_servicios').select('*').eq('id',id).single();
+  if(!s) return;
+  currentWebEditId=id; currentWebEditTable='web_servicios';
+  document.getElementById('ws-modal-title').textContent='Editar Servicio';
+  document.getElementById('ws-delete-btn').style.display='block';
+  document.getElementById('ws-icono').value=s.icono||'';
+  document.getElementById('ws-nombre').value=s.nombre||'';
+  document.getElementById('ws-descripcion').value=s.descripcion||'';
+  document.getElementById('ws-tags').value=s.tags||'';
+  document.getElementById('ws-precio').value=s.precio_desde||'';
+  document.getElementById('ws-orden').value=s.orden||1;
+  document.getElementById('ws-activo').value=String(s.activo);
+  openModal('modal-web-servicio');
+}
+
+async function saveWebServicio(){
+  var nombre=document.getElementById('ws-nombre').value.trim();
+  if(!nombre){toast('Error','El nombre es requerido','err');return;}
+  var data={
+    icono:document.getElementById('ws-icono').value||'🔧',
+    nombre:nombre,
+    descripcion:document.getElementById('ws-descripcion').value.trim()||null,
+    tags:document.getElementById('ws-tags').value.trim()||null,
+    precio_desde:document.getElementById('ws-precio').value.trim()||null,
+    orden:parseInt(document.getElementById('ws-orden').value)||1,
+    activo:document.getElementById('ws-activo').value==='true'
+  };
+  var error;
+  if(currentWebEditId){
+    ({error}=await db.from('web_servicios').update(data).eq('id',currentWebEditId));
+  } else {
+    ({error}=await db.from('web_servicios').insert([data]));
+  }
+  if(error){toast('Error',error.message,'err');return;}
+  closeModal('modal-web-servicio');
+  toast(currentWebEditId?'Servicio actualizado':'Servicio agregado',nombre);
+  loadWebServicios();
+}
+
+// ── CATÁLOGO WEB ──────────────────────────────────────────────────
+async function loadWebCatalogo(){
+  var {data} = await db.from('web_catalogo').select('*').order('orden');
+  var el = document.getElementById('web-catalogo-list');
+  if(!el) return;
+  if(!data||!data.length){ el.innerHTML='<div class="empty"><p>Sin productos.</p></div>'; return; }
+  el.innerHTML = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'+data.map(function(p){
+    return '<div style="display:flex;align-items:center;gap:10px;background:var(--s3);border:1px solid var(--bd);border-radius:var(--r);padding:10px 12px">'
+      +'<span style="font-size:24px">'+p.emoji+'</span>'
+      +'<div style="flex:1"><div style="font-size:12px;font-weight:600">'+p.nombre+'</div><div style="font-size:11px;color:var(--acc)">'+p.precio+'</div></div>'
+      +'<button class="btn btn-ghost btn-sm" onclick="editWebCatalogo("+p.id+")">✏️</button>'
+      +'</div>';
+  }).join('')+'</div>';
+}
+
+function showAddWebCatalogo(){
+  currentWebEditId=null; currentWebEditTable='web_catalogo';
+  document.getElementById('wc-modal-title').textContent='Nuevo Producto';
+  document.getElementById('wc-delete-btn').style.display='none';
+  ['wc-icono','wc-nombre','wc-precio','wc-stock','wc-orden'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('wc-activo').value='true';
+  openModal('modal-web-catalogo');
+}
+
+async function editWebCatalogo(id){
+  var {data:p} = await db.from('web_catalogo').select('*').eq('id',id).single();
+  if(!p) return;
+  currentWebEditId=id; currentWebEditTable='web_catalogo';
+  document.getElementById('wc-modal-title').textContent='Editar Producto';
+  document.getElementById('wc-delete-btn').style.display='block';
+  document.getElementById('wc-icono').value=p.emoji||'';
+  document.getElementById('wc-nombre').value=p.nombre||'';
+  document.getElementById('wc-precio').value=p.precio||'';
+  document.getElementById('wc-stock').value=p.stock_texto||'';
+  document.getElementById('wc-orden').value=p.orden||1;
+  document.getElementById('wc-activo').value=String(p.activo);
+  openModal('modal-web-catalogo');
+}
+
+async function saveWebCatalogo(){
+  var nombre=document.getElementById('wc-nombre').value.trim();
+  if(!nombre){toast('Error','Nombre requerido','err');return;}
+  var data={emoji:document.getElementById('wc-icono').value||'📦',nombre,precio:document.getElementById('wc-precio').value.trim()||null,stock_texto:document.getElementById('wc-stock').value.trim()||'En stock',orden:parseInt(document.getElementById('wc-orden').value)||1,activo:document.getElementById('wc-activo').value==='true'};
+  var error;
+  if(currentWebEditId){({error}=await db.from('web_catalogo').update(data).eq('id',currentWebEditId));}
+  else {({error}=await db.from('web_catalogo').insert([data]));}
+  if(error){toast('Error',error.message,'err');return;}
+  closeModal('modal-web-catalogo');
+  toast(currentWebEditId?'Producto actualizado':'Producto agregado',nombre);
+  loadWebCatalogo();
+}
+
+// ── TESTIMONIOS ───────────────────────────────────────────────────
+async function loadWebTestimonios(){
+  var {data} = await db.from('web_testimonios').select('*').order('orden');
+  var el = document.getElementById('web-testimonios-list');
+  if(!el) return;
+  if(!data||!data.length){el.innerHTML='<div class="empty"><p>Sin testimonios.</p></div>';return;}
+  el.innerHTML='<div style="display:flex;flex-direction:column;gap:8px">'+data.map(function(t){
+    var stars='★'.repeat(t.estrellas||5);
+    return '<div style="display:flex;align-items:center;gap:12px;background:var(--s3);border:1px solid var(--bd);border-radius:var(--r);padding:12px 14px">'
+      +'<div style="width:36px;height:36px;background:var(--acc2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;flex-shrink:0">'+t.inicial+'</div>'
+      +'<div style="flex:1"><div style="font-size:13px;font-weight:600">'+t.nombre+'</div><div style="font-size:10px;color:var(--gold)">'+stars+'</div><div style="font-size:11px;color:var(--t2)">'+t.servicio+'</div></div>'
+      +'<span class="badge '+(t.activo?'b-listo':'b-entregado')+'">'+(t.activo?'Activo':'Oculto')+'</span>'
+      +'<button class="btn btn-ghost btn-sm" onclick="editTestimonio("+t.id+")">✏️</button>'
+      +'</div>';
+  }).join('')+'</div>';
+}
+
+function showAddTestimonio(){
+  currentWebEditId=null;currentWebEditTable='web_testimonios';
+  document.getElementById('wt-modal-title').textContent='Nuevo Testimonio';
+  document.getElementById('wt-delete-btn').style.display='none';
+  ['wt-nombre','wt-inicial','wt-servicio','wt-texto','wt-orden'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('wt-estrellas').value='5';
+  document.getElementById('wt-activo').value='true';
+  openModal('modal-testimonio');
+}
+
+async function editTestimonio(id){
+  var {data:t}=await db.from('web_testimonios').select('*').eq('id',id).single();
+  if(!t) return;
+  currentWebEditId=id;currentWebEditTable='web_testimonios';
+  document.getElementById('wt-modal-title').textContent='Editar Testimonio';
+  document.getElementById('wt-delete-btn').style.display='block';
+  document.getElementById('wt-nombre').value=t.nombre||'';
+  document.getElementById('wt-inicial').value=t.inicial||'';
+  document.getElementById('wt-servicio').value=t.servicio||'';
+  document.getElementById('wt-texto').value=t.texto||'';
+  document.getElementById('wt-estrellas').value=String(t.estrellas||5);
+  document.getElementById('wt-orden').value=t.orden||1;
+  document.getElementById('wt-activo').value=String(t.activo);
+  openModal('modal-testimonio');
+}
+
+async function saveTestimonio(){
+  var nombre=document.getElementById('wt-nombre').value.trim();
+  var texto=document.getElementById('wt-texto').value.trim();
+  if(!nombre||!texto){toast('Error','Nombre y texto requeridos','err');return;}
+  var data={nombre,inicial:document.getElementById('wt-inicial').value.trim()||nombre.charAt(0).toUpperCase(),servicio:document.getElementById('wt-servicio').value.trim()||null,texto,estrellas:parseInt(document.getElementById('wt-estrellas').value)||5,orden:parseInt(document.getElementById('wt-orden').value)||1,activo:document.getElementById('wt-activo').value==='true'};
+  var error;
+  if(currentWebEditId){({error}=await db.from('web_testimonios').update(data).eq('id',currentWebEditId));}
+  else{({error}=await db.from('web_testimonios').insert([data]));}
+  if(error){toast('Error',error.message,'err');return;}
+  closeModal('modal-testimonio');
+  toast(currentWebEditId?'Testimonio actualizado':'Testimonio agregado',nombre);
+  loadWebTestimonios();
+}
+
+// ── BLOG ──────────────────────────────────────────────────────────
+async function loadWebBlog(){
+  var {data}=await db.from('web_blog').select('*').order('orden');
+  var el=document.getElementById('web-blog-list');
+  if(!el) return;
+  if(!data||!data.length){el.innerHTML='<div class="empty"><p>Sin artículos.</p></div>';return;}
+  el.innerHTML='<div style="display:flex;flex-direction:column;gap:8px">'+data.map(function(b){
+    return '<div style="display:flex;align-items:center;gap:12px;background:var(--s3);border:1px solid var(--bd);border-radius:var(--r);padding:12px 14px">'
+      +'<span style="font-size:28px;flex-shrink:0">'+b.emoji+'</span>'
+      +'<div style="flex:1"><div style="font-size:13px;font-weight:600">'+b.titulo+'</div><div style="font-size:10px;color:var(--acc);letter-spacing:1px">'+b.categoria+'</div></div>'
+      +'<span class="badge '+(b.activo?'b-listo':'b-entregado')+'">'+(b.activo?'Activo':'Oculto')+'</span>'
+      +'<button class="btn btn-ghost btn-sm" onclick="editBlog("+b.id+")">✏️</button>'
+      +'</div>';
+  }).join('')+'</div>';
+}
+
+function showAddBlog(){
+  currentWebEditId=null;currentWebEditTable='web_blog';
+  document.getElementById('wb-modal-title').textContent='Nuevo Artículo';
+  document.getElementById('wb-delete-btn').style.display='none';
+  ['wb-emoji','wb-categoria','wb-titulo','wb-extracto','wb-contenido','wb-orden'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('wb-activo').value='true';
+  openModal('modal-blog');
+}
+
+async function editBlog(id){
+  var {data:b}=await db.from('web_blog').select('*').eq('id',id).single();
+  if(!b) return;
+  currentWebEditId=id;currentWebEditTable='web_blog';
+  document.getElementById('wb-modal-title').textContent='Editar Artículo';
+  document.getElementById('wb-delete-btn').style.display='block';
+  document.getElementById('wb-emoji').value=b.emoji||'';
+  document.getElementById('wb-categoria').value=b.categoria||'';
+  document.getElementById('wb-titulo').value=b.titulo||'';
+  document.getElementById('wb-extracto').value=b.extracto||'';
+  document.getElementById('wb-contenido').value=b.contenido||'';
+  document.getElementById('wb-orden').value=b.orden||1;
+  document.getElementById('wb-activo').value=String(b.activo);
+  openModal('modal-blog');
+}
+
+async function saveBlog(){
+  var titulo=document.getElementById('wb-titulo').value.trim();
+  if(!titulo){toast('Error','Título requerido','err');return;}
+  var data={emoji:document.getElementById('wb-emoji').value||'📝',categoria:document.getElementById('wb-categoria').value.trim()||null,titulo,extracto:document.getElementById('wb-extracto').value.trim()||null,contenido:document.getElementById('wb-contenido').value.trim()||null,orden:parseInt(document.getElementById('wb-orden').value)||1,activo:document.getElementById('wb-activo').value==='true'};
+  var error;
+  if(currentWebEditId){({error}=await db.from('web_blog').update(data).eq('id',currentWebEditId));}
+  else{({error}=await db.from('web_blog').insert([data]));}
+  if(error){toast('Error',error.message,'err');return;}
+  closeModal('modal-blog');
+  toast(currentWebEditId?'Artículo actualizado':'Artículo agregado',titulo);
+  loadWebBlog();
+}
+
+// ── DELETE WEB ITEM ───────────────────────────────────────────────
+async function deleteWebItem(tabla){
+  if(!currentWebEditId) return;
+  if(!confirm('¿Eliminar este elemento? Esta acción no se puede deshacer.')) return;
+  var {error}=await db.from(tabla).delete().eq('id',currentWebEditId);
+  if(error){toast('Error',error.message,'err');return;}
+  var modals={'web_servicios':'modal-web-servicio','web_catalogo':'modal-web-catalogo','web_testimonios':'modal-testimonio','web_blog':'modal-blog'};
+  var reloads={'web_servicios':loadWebServicios,'web_catalogo':loadWebCatalogo,'web_testimonios':loadWebTestimonios,'web_blog':loadWebBlog};
+  closeModal(modals[tabla]);
+  toast('Eliminado','El elemento fue eliminado');
+  if(reloads[tabla]) reloads[tabla]();
 }
 
 // ── DASHBOARD ─────────────────────────────────────────────────────
@@ -3036,6 +3602,7 @@ function showAdminTab(name){
   if(name==='whatsapp') loadWAMensajes();
   if(name==='usuarios') loadUsers();
   if(name==='recordatorios'){ loadRecordatoriosConfig(); }
+  if(name==='web'){ showWebTab('hero'); }
   if(name==='contacto'||name==='marca'||name==='orden') applyConfig();
 }
 
@@ -3164,6 +3731,45 @@ if(window.innerWidth<=768) document.getElementById('menu-btn').style.display='fl
 
 // Cargar config y mostrar login
 (async()=>{ await loadConfig(); document.getElementById('login-screen').style.display='flex'; })();
+</script>
+
+<script>
+// ── REGISTRAR SERVICE WORKER (PWA) ───────────────────────────────
+if('serviceWorker' in navigator){
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('/sw.js')
+      .then(function(reg){ console.log('SW registrado:', reg.scope); })
+      .catch(function(err){ console.log('SW error:', err); });
+  });
+}
+
+// ── PROMPT DE INSTALACIÓN ─────────────────────────────────────────
+var deferredPrompt;
+window.addEventListener('beforeinstallprompt', function(e){
+  e.preventDefault();
+  deferredPrompt = e;
+  // Mostrar botón de instalar en el sidebar
+  var installBtn = document.getElementById('pwa-install-btn');
+  if(installBtn) installBtn.style.display = 'flex';
+});
+
+window.addEventListener('appinstalled', function(){
+  deferredPrompt = null;
+  var installBtn = document.getElementById('pwa-install-btn');
+  if(installBtn) installBtn.style.display = 'none';
+  if(typeof toast === 'function') toast('App instalada','COMPUCEL está instalado en tu dispositivo 📱');
+});
+
+function instalarApp(){
+  if(!deferredPrompt) return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(function(result){
+    if(result.outcome === 'accepted'){
+      console.log('App instalada');
+    }
+    deferredPrompt = null;
+  });
+}
 </script>
 </body>
 </html>

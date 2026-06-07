@@ -3,6 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#00e5ff">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="COMPUCEL">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <!-- SEO -->
+  <meta property="og:title" content="COMPUCEL SOLUTIONS JM — Servicio Técnico">
+  <meta property="og:description" content="Reparación profesional de celulares, laptops, PC y consolas. Servicio técnico especializado.">
+  <meta property="og:image" content="icon.svg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
 <title>COMPUCEL SOLUTIONS JM — Servicio Técnico Especializado | Curicó</title>
 <meta name="description" content="Servicio técnico especializado en reparación de celulares, laptops, PC, consolas y más. Liberaciones, desbloqueos y venta de accesorios en Curicó.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -246,7 +260,7 @@ footer{background:var(--s1);border-top:1px solid var(--bd);padding:48px 40px 24p
   </ul>
   <div style="display:flex;align-items:center;gap:16px">
     <div class="nav-badge"><span class="nav-dot"></span>CURICÓ · ABIERTO</div>
-    <a href="https://wa.me/56979726434" class="nav-cta" target="_blank">WhatsApp</a>
+    <a href="https://wa.me/56979726434" class="nav-cta dyn-wa-link" data-wa-msg="Hola, necesito información sobre sus servicios" target="_blank">WhatsApp</a>
   </div>
   <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
 </nav>
@@ -269,13 +283,12 @@ footer{background:var(--s1);border-top:1px solid var(--bd);padding:48px 40px 24p
     <div>
       <div class="hero-badge">⚡ Servicio técnico especializado</div>
       <h1 class="hero-title">
-        <span class="accent">COMPUCEL</span>
-        SOLUTIONS JM
-        <span class="line2">Tu tecnología en las mejores manos</span>
+        <span class="accent dyn-nombre">COMPUCEL SOLUTIONS JM</span>
+        <span class="line2 dyn-slogan">Tu tecnología en las mejores manos</span>
       </h1>
-      <p class="hero-desc">Reparación profesional de celulares, laptops, PC, consolas y Smart TV en Curicó. Liberaciones, desbloqueos y venta de accesorios originales.</p>
+      <p class="hero-desc"><span class="dyn-ciudad-hero">Reparación profesional de celulares, laptops, PC, consolas y Smart TV en Curicó.</span> Liberaciones, desbloqueos y venta de accesorios originales.</p>
       <div class="hero-ctas">
-        <a href="https://wa.me/56979726434?text=Hola, necesito servicio técnico" class="btn-primary" target="_blank">
+        <a href="https://wa.me/56979726434?text=Hola" class="btn-primary dyn-wa-link" data-wa-msg="Hola, necesito servicio técnico" target="_blank">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M11.99 0C5.376 0 .001 5.375.001 11.99c0 2.111.549 4.094 1.508 5.82L0 24l6.335-1.483A11.944 11.944 0 0 0 11.99 24C18.604 24 24 18.625 24 12.01 24 5.375 18.604 0 11.99 0zm0 21.818a9.828 9.828 0 0 1-5.01-1.374l-.36-.214-3.726.872.923-3.616-.234-.373A9.777 9.777 0 0 1 2.182 12.01c0-5.413 4.406-9.818 9.808-9.818 5.413 0 9.819 4.405 9.819 9.818 0 5.414-4.406 9.808-9.819 9.808z"/></svg>
           Cotizar ahora
         </a>
@@ -310,48 +323,9 @@ footer{background:var(--s1);border-top:1px solid var(--bd);padding:48px 40px 24p
       <h2 class="section-title">¿Qué reparamos?</h2>
       <p class="section-desc">Somos expertos en todo tipo de dispositivos electrónicos. Si tiene problemas, nosotros lo solucionamos.</p>
     </div>
-    <div class="services-grid">
-      <div class="service-card reveal">
-        <span class="service-icon">📱</span>
-        <div class="service-name">SMARTPHONES</div>
-        <p class="service-desc">Cambio de pantalla, batería, conector de carga, cámara, daño por agua y más. Todas las marcas.</p>
-        <div class="service-tags"><span class="tag">Samsung</span><span class="tag">iPhone</span><span class="tag">Xiaomi</span><span class="tag">Motorola</span></div>
-        <div class="price-tag">Desde $15.000 CLP</div>
-      </div>
-      <div class="service-card reveal">
-        <span class="service-icon">💻</span>
-        <div class="service-name">LAPTOPS & PC</div>
-        <p class="service-desc">Formateo, instalación de Windows, cambio de disco, RAM, pantalla, teclado y reparación de placa.</p>
-        <div class="service-tags"><span class="tag">HP</span><span class="tag">Dell</span><span class="tag">Lenovo</span><span class="tag">Apple</span></div>
-        <div class="price-tag">Desde $20.000 CLP</div>
-      </div>
-      <div class="service-card reveal">
-        <span class="service-icon">🎮</span>
-        <div class="service-name">CONSOLAS</div>
-        <p class="service-desc">Reparación de PlayStation, Xbox, Nintendo Switch. Cambio de joystick, lente óptico, fuente de poder.</p>
-        <div class="service-tags"><span class="tag">PS4/PS5</span><span class="tag">Xbox</span><span class="tag">Switch</span></div>
-        <div class="price-tag">Desde $25.000 CLP</div>
-      </div>
-      <div class="service-card reveal">
-        <span class="service-icon">📺</span>
-        <div class="service-name">SMART TV</div>
-        <p class="service-desc">Diagnóstico y reparación de Smart TV. Problemas de imagen, sonido, Wi-Fi y actualizaciones de firmware.</p>
-        <div class="service-tags"><span class="tag">Samsung</span><span class="tag">LG</span><span class="tag">Sony</span><span class="tag">TCL</span></div>
-        <div class="price-tag">Desde $30.000 CLP</div>
-      </div>
-      <div class="service-card reveal">
-        <span class="service-icon">🔓</span>
-        <div class="service-name">LIBERACIONES</div>
-        <p class="service-desc">Liberación de celulares de operador. Desbloqueo FRP/Google Account y iCloud. Rápido y garantizado.</p>
-        <div class="service-tags"><span class="tag">Movistar</span><span class="tag">Entel</span><span class="tag">Claro</span><span class="tag">WOM</span></div>
-        <div class="price-tag">Desde $8.000 CLP</div>
-      </div>
-      <div class="service-card reveal">
-        <span class="service-icon">🛡️</span>
-        <div class="service-name">MANTENIMIENTO</div>
-        <p class="service-desc">Limpieza interna, eliminación de virus y malware, optimización del sistema y respaldo de datos.</p>
-        <div class="service-tags"><span class="tag">Limpieza</span><span class="tag">Antivirus</span><span class="tag">Backup</span></div>
-        <div class="price-tag">Desde $12.000 CLP</div>
+    <div class="services-grid" id="servicios-grid">
+      <div class="service-card" style="display:flex;align-items:center;justify-content:center;min-height:160px">
+        <div style="color:var(--t3);font-size:13px">Cargando servicios...</div>
       </div>
     </div>
   </div>
@@ -366,15 +340,10 @@ footer{background:var(--s1);border-top:1px solid var(--bd);padding:48px 40px 24p
       <p class="section-desc">Contamos con stock de accesorios originales y compatibles para tu dispositivo.</p>
     </div>
     <div class="catalog-grid" id="catalog-grid">
-      <div class="product-card reveal"><span class="product-emoji">🔌</span><div class="product-name">Cargadores originales</div><div class="product-price">Desde $8.000</div><div class="product-stock">✓ En stock</div></div>
-      <div class="product-card reveal"><span class="product-emoji">🎧</span><div class="product-name">Audífonos Bluetooth</div><div class="product-price">Desde $12.000</div><div class="product-stock">✓ En stock</div></div>
-      <div class="product-card reveal"><span class="product-emoji">📱</span><div class="product-name">Fundas y protectores</div><div class="product-price">Desde $3.000</div><div class="product-stock">✓ En stock</div></div>
-      <div class="product-card reveal"><span class="product-emoji">🔋</span><div class="product-name">Baterías originales</div><div class="product-price">Desde $15.000</div><div class="product-stock">✓ En stock</div></div>
-      <div class="product-card reveal"><span class="product-emoji">💾</span><div class="product-name">Memorias y pendrives</div><div class="product-price">Desde $6.000</div><div class="product-stock">✓ En stock</div></div>
-      <div class="product-card reveal"><span class="product-emoji">🖥️</span><div class="product-name">Pantallas de repuesto</div><div class="product-price">Desde $20.000</div><div class="product-stock">Consultar</div></div>
+      <div style="grid-column:1/-1;text-align:center;color:var(--t3);font-size:13px;padding:20px">Cargando productos...</div>
     </div>
     <div style="text-align:center;margin-top:32px">
-      <a href="https://wa.me/56979726434?text=Hola, consulto por disponibilidad de accesorios" class="btn-secondary" target="_blank">Ver catálogo completo por WhatsApp →</a>
+      <a href="https://wa.me/56979726434" class="btn-secondary dyn-wa-link" data-wa-msg="Hola, consulto por disponibilidad de accesorios" target="_blank">Ver catálogo completo por WhatsApp →</a>
     </div>
   </div>
 </section>
@@ -407,22 +376,8 @@ footer{background:var(--s1);border-top:1px solid var(--bd);padding:48px 40px 24p
       <div class="section-tag">// Lo que dicen nuestros clientes</div>
       <h2 class="section-title">Opiniones reales</h2>
     </div>
-    <div class="testimonios-grid">
-      <div class="testimonio-card reveal">
-        <div class="stars">★★★★★</div>
-        <p class="testimonio-text">Llevé mi iPhone 13 con la pantalla quebrada y en menos de 2 horas quedó como nuevo. Excelente atención y precio justo.</p>
-        <div class="testimonio-author"><div class="author-avatar">M</div><div><div class="author-name">María González</div><div class="author-service">Cambio de pantalla iPhone 13</div></div></div>
-      </div>
-      <div class="testimonio-card reveal">
-        <div class="stars">★★★★★</div>
-        <p class="testimonio-text">Mi laptop Dell llevaba meses lenta y con virus. La dejé y al día siguiente estaba como recién comprada. 100% recomendados.</p>
-        <div class="testimonio-author"><div class="author-avatar">C</div><div><div class="author-name">Carlos Muñoz</div><div class="author-service">Formateo y optimización laptop</div></div></div>
-      </div>
-      <div class="testimonio-card reveal">
-        <div class="stars">★★★★★</div>
-        <p class="testimonio-text">Liberaron mi Samsung en 30 minutos. Súper rápido, amables y el precio más bajo que encontré en Curicó.</p>
-        <div class="testimonio-author"><div class="author-avatar">A</div><div><div class="author-name">Andrea Pérez</div><div class="author-service">Liberación Samsung</div></div></div>
-      </div>
+    <div class="testimonios-grid" id="testimonios-grid">
+      <div style="grid-column:1/-1;text-align:center;color:var(--t3);font-size:13px;padding:20px">Cargando testimonios...</div>
     </div>
   </div>
 </section>
@@ -435,34 +390,8 @@ footer{background:var(--s1);border-top:1px solid var(--bd);padding:48px 40px 24p
       <h2 class="section-title">Blog de tecnología</h2>
       <p class="section-desc">Tips y consejos para cuidar mejor tus dispositivos.</p>
     </div>
-    <div class="blog-grid">
-      <div class="blog-card reveal">
-        <div class="blog-img">🔋</div>
-        <div class="blog-content">
-          <div class="blog-tag">BATERÍA</div>
-          <div class="blog-title">5 hábitos que están dañando la batería de tu celular</div>
-          <p class="blog-excerpt">Evita dejarla cargar toda la noche, no la descargues al 0% y mantén la temperatura estable...</p>
-          <div class="blog-meta"><span>15 Abr 2025</span><span style="color:var(--acc)">Leer más →</span></div>
-        </div>
-      </div>
-      <div class="blog-card reveal">
-        <div class="blog-img">🛡️</div>
-        <div class="blog-content">
-          <div class="blog-tag">SEGURIDAD</div>
-          <div class="blog-title">Cómo saber si tu celular tiene un virus o malware</div>
-          <p class="blog-excerpt">Si tu celular está lento, se calienta o aparecen apps que no instalaste, puede ser una señal de alerta...</p>
-          <div class="blog-meta"><span>8 Abr 2025</span><span style="color:var(--acc)">Leer más →</span></div>
-        </div>
-      </div>
-      <div class="blog-card reveal">
-        <div class="blog-img">💧</div>
-        <div class="blog-content">
-          <div class="blog-tag">EMERGENCIAS</div>
-          <div class="blog-title">¿Tu celular cayó al agua? Haz esto inmediatamente</div>
-          <p class="blog-excerpt">No lo encendas, no lo cargues y llévalo al técnico lo antes posible. Los primeros 30 minutos son clave...</p>
-          <div class="blog-meta"><span>1 Abr 2025</span><span style="color:var(--acc)">Leer más →</span></div>
-        </div>
-      </div>
+    <div class="blog-grid" id="blog-grid">
+      <div style="grid-column:1/-1;text-align:center;color:var(--t3);font-size:13px;padding:20px">Cargando artículos...</div>
     </div>
   </div>
 </section>
@@ -478,24 +407,24 @@ footer{background:var(--s1);border-top:1px solid var(--bd);padding:48px 40px 24p
       <div class="contact-info reveal">
         <div class="contact-item">
           <div class="contact-icon">📍</div>
-          <div><div class="contact-label">Dirección</div><div class="contact-value">Pasaje Diecisiete 89, Curicó<br>Región del Maule, Chile</div></div>
+          <div><div class="contact-label">Dirección</div><div class="contact-value"><span class="dyn-dir">Pasaje Diecisiete 89, Curicó</span><br><span class="dyn-region">Región del Maule</span>, Chile</div></div>
         </div>
         <div class="contact-item">
           <div class="contact-icon">📞</div>
-          <div><div class="contact-label">Teléfono / WhatsApp</div><div class="contact-value"><a href="https://wa.me/56979726434" target="_blank">+56 9 7972 6434</a></div></div>
+          <div><div class="contact-label">Teléfono / WhatsApp</div><div class="contact-value"><a href="https://wa.me/56979726434" class="dyn-tel-link" target="_blank">+56 9 7972 6434</a></div></div>
         </div>
         <div class="contact-item">
           <div class="contact-icon">🕐</div>
-          <div><div class="contact-label">Horario de atención</div><div class="contact-value">Lunes a Sábado<br>10:00 — 20:00 hrs</div></div>
+          <div><div class="contact-label">Horario de atención</div><div class="contact-value"><span class="dyn-horario">Lunes a Sábado 10:00-20:00</span></div></div>
         </div>
         <div class="contact-item">
           <div class="contact-icon">📸</div>
-          <div><div class="contact-label">Instagram</div><div class="contact-value"><a href="https://instagram.com/compucelsolutionsss" target="_blank">@compucelsolutionsss</a></div></div>
+          <div><div class="contact-label">Instagram</div><div class="contact-value"><a href="https://instagram.com/compucelsolutionsss" class="dyn-instagram" target="_blank">@compucelsolutionsss</a></div></div>
         </div>
-        <a href="https://maps.google.com/?q=Pasaje+Diecisiete+89+Curico" target="_blank" class="map-placeholder">
+        <a href="https://maps.google.com/?q=Pasaje+Diecisiete+89+Curico" class="dyn-maps-link" target="_blank" class="map-placeholder">
           <span class="map-icon">🗺️</span>
           <strong>VER EN GOOGLE MAPS</strong>
-          <p>Pasaje Diecisiete 89, Curicó</p>
+          <p class="dyn-dir">Pasaje Diecisiete 89, Curicó</p>
         </a>
       </div>
       <div class="contact-form reveal">
@@ -519,10 +448,10 @@ footer{background:var(--s1);border-top:1px solid var(--bd);padding:48px 40px 24p
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
-      <h3>COMPUCEL SOLUTIONS JM</h3>
-      <p>Servicio técnico especializado en Curicó. Reparamos tu tecnología con garantía y al mejor precio.</p>
+      <h3 class="dyn-nombre">COMPUCEL SOLUTIONS JM</h3>
+      <p class="dyn-desc-footer">Servicio técnico especializado en Curicó. Reparamos tu tecnología con garantía y al mejor precio.</p>
       <div class="social-links" style="margin-top:16px">
-        <a href="https://wa.me/56979726434" class="social-link" target="_blank">💬</a>
+        <a href="https://wa.me/56979726434" class="social-link dyn-wa-link" data-wa-msg="Hola, me contacto desde su web" target="_blank">💬</a>
         <a href="https://instagram.com/compucelsolutionsss" class="social-link" target="_blank">📸</a>
       </div>
     </div>
@@ -548,20 +477,20 @@ footer{background:var(--s1);border-top:1px solid var(--bd);padding:48px 40px 24p
     <div class="footer-col">
       <h4>Contacto</h4>
       <ul>
-        <li><a href="https://wa.me/56979726434" target="_blank">+56 9 7972 6434</a></li>
-        <li><a href="#">Pasaje 17 #89, Curicó</a></li>
-        <li><a href="#">Lun-Sáb 10:00-20:00</a></li>
+        <li><a href="https://wa.me/56979726434" class="dyn-tel-link" target="_blank">+56 9 7972 6434</a></li>
+        <li><a href="#" class="dyn-dir">Pasaje 17 #89, Curicó</a></li>
+        <li><a href="#" class="dyn-horario">Lun-Sáb 10:00-20:00</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 COMPUCEL SOLUTIONS JM — Curicó, Chile</span>
+    <span class="dyn-copyright">© 2025 COMPUCEL SOLUTIONS JM — Curicó, Chile</span>
     <span style="color:var(--acc)">Hecho con ⚡ para los mejores clientes</span>
   </div>
 </footer>
 
 <!-- WA FLOAT -->
-<a href="https://wa.me/56979726434?text=Hola, necesito información sobre sus servicios" class="wa-float" target="_blank">
+<a href="https://wa.me/56979726434?text=Hola" class="wa-float dyn-wa-link" data-wa-msg="Hola, necesito información sobre sus servicios" target="_blank">
   <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M11.99 0C5.376 0 .001 5.375.001 11.99c0 2.111.549 4.094 1.508 5.82L0 24l6.335-1.483A11.944 11.944 0 0 0 11.99 24C18.604 24 24 18.625 24 12.01 24 5.375 18.604 0 11.99 0zm0 21.818a9.828 9.828 0 0 1-5.01-1.374l-.36-.214-3.726.872.923-3.616-.234-.373A9.777 9.777 0 0 1 2.182 12.01c0-5.413 4.406-9.818 9.808-9.818 5.413 0 9.819 4.405 9.819 9.818 0 5.414-4.406 9.808-9.819 9.808z"/></svg>
 </a>
 
@@ -646,7 +575,7 @@ function enviarConsulta(){
   var msg = document.getElementById('cf-mensaje').value.trim();
   if(!nombre||!msg){ alert('Por favor completa nombre y descripción del problema'); return; }
   var txt = 'Hola COMPUCEL SOLUTIONS JM!'+'\n\nNombre: '+nombre+(tel?'\nTeléfono: '+tel:'')+(equipo?'\nEquipo: '+equipo:'')+'\n\nProblema: '+msg+'\n\nQuedo atento a su respuesta.';
-  window.open('https://wa.me/56979726434?text='+encodeURIComponent(txt),'_blank');
+  var waLink = document.querySelector('.dyn-wa-link'); var waHref = waLink ? waLink.href.split('?')[0] : 'https://wa.me/56979726434'; window.open(waHref+'?text='+encodeURIComponent(txt),'_blank');
 }
 
 // ── MOBILE MENU ───────────────────────────────────────────────────
@@ -679,6 +608,250 @@ window.addEventListener('scroll',function(){
     setTimeout(buscarOrden, 500);
   }
 })();
+
+// ── CARGAR CONFIGURACIÓN DESDE SUPABASE ──────────────────────────
+async function cargarConfigWeb(){
+  try {
+    var db2 = window.supabase.createClient(
+      'https://juoghaddibttnleqeqwq.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp1b2doYWRkaWJ0dG5sZXFlcXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyNTU0NjgsImV4cCI6MjA5MjgzMTQ2OH0.4IQUqlO8TC982--DQor3bS_UA-Vk8abzJzTlqmFWP4U'
+    );
+    var {data} = await db2.from('config').select('*');
+    if(!data) return;
+    
+    var cfg = {};
+    data.forEach(function(r){ cfg[r.clave] = r.valor; });
+    
+    var nombre    = cfg.nombre_negocio || 'COMPUCEL SOLUTIONS JM';
+    var slogan    = cfg.slogan || 'Tu tecnología en las mejores manos';
+    var tel       = cfg.telefono || '+56 9 7972 6434';
+    window._cfg_tel_raw = telRaw;
+    var telRaw    = tel.replace(/\D/g,'');
+    var dir       = cfg.direccion || 'Pasaje Diecisiete 89, Curicó';
+    var horario   = cfg.horario || 'Lunes a Sábado 10:00-20:00';
+    var instagram = cfg.instagram || '@compucelsolutionsss';
+    var ciudad    = cfg.ciudad || 'Curicó';
+    var region    = cfg.region || 'Región del Maule';
+    var logo      = cfg.logo_url || '';
+    
+    // ── Actualizar todos los textos dinámicamente ──
+    
+    // Nombre del negocio
+    document.querySelectorAll('.dyn-nombre').forEach(function(el){ el.textContent = nombre; });
+    
+    // Slogan
+    document.querySelectorAll('.dyn-slogan').forEach(function(el){ el.textContent = slogan; });
+    
+    // Teléfono (texto)
+    document.querySelectorAll('.dyn-tel').forEach(function(el){ el.textContent = tel; });
+    
+    // Teléfono (links href)
+    document.querySelectorAll('.dyn-tel-link').forEach(function(el){
+      el.href = 'https://wa.me/'+telRaw+'?text='+encodeURIComponent('Hola '+nombre+', necesito información sobre sus servicios');
+      el.textContent = tel;
+    });
+    
+    // WhatsApp links (todos los botones de WA)
+    document.querySelectorAll('.dyn-wa-link').forEach(function(el){
+      var txt = el.getAttribute('data-wa-msg') || 'Hola '+nombre+', necesito información sobre sus servicios';
+      el.href = 'https://wa.me/'+telRaw+'?text='+encodeURIComponent(txt);
+    });
+    
+    // Dirección
+    document.querySelectorAll('.dyn-dir').forEach(function(el){ el.textContent = dir; });
+    
+    // Horario
+    document.querySelectorAll('.dyn-horario').forEach(function(el){ el.textContent = horario; });
+    
+    // Instagram
+    document.querySelectorAll('.dyn-instagram').forEach(function(el){
+      el.textContent = instagram;
+      if(el.tagName === 'A') el.href = 'https://instagram.com/'+instagram.replace('@','');
+    });
+    
+    // Ciudad y región
+    document.querySelectorAll('.dyn-ciudad').forEach(function(el){ el.textContent = ciudad; });
+    document.querySelectorAll('.dyn-region').forEach(function(el){ el.textContent = region; });
+    
+    // Logo
+    if(logo){
+      document.querySelectorAll('.dyn-logo').forEach(function(el){
+        el.innerHTML = '<img src="'+logo+'" style="width:100%;height:100%;object-fit:cover;border-radius:inherit" alt="Logo">';
+      });
+    }
+    
+    // Nav badge (ciudad)
+    var navBadge = document.querySelector('.nav-badge');
+    if(navBadge) navBadge.innerHTML = '<span class="nav-dot"></span>'+ciudad.toUpperCase()+' · ABIERTO';
+    
+    // Título de la página
+    document.title = nombre+' — Servicio Técnico Especializado | '+ciudad;
+    
+    // Footer brand description
+    var descFooter = document.querySelector('.dyn-desc-footer');
+    if(descFooter) descFooter.textContent = 'Servicio técnico especializado en '+ciudad+'. Reparamos tu tecnología con garantía y al mejor precio.';
+
+    // Footer copyright
+    var footerBottom = document.querySelector('.footer-bottom span:first-child');
+    if(footerBottom) footerBottom.textContent = '© 2025 '+nombre+' — '+ciudad+', Chile';
+    
+    // Nav logo text - update icon initials and name
+    var navLogoIcon = document.querySelector('.nav-logo-icon');
+    if(navLogoIcon && !logo) navLogoIcon.textContent = nombre.substring(0,2).toUpperCase();
+    var navNombreShort = document.querySelector('.dyn-nombre-short');
+    if(navNombreShort) navNombreShort.textContent = nombre.split(' ')[0];
+    // Nav logo text
+    var navLogo = document.querySelector('.nav-logo');
+    if(navLogo){
+      var icon = navLogo.querySelector('.nav-logo-icon');
+      var iconText = icon ? icon.outerHTML : '';
+      navLogo.innerHTML = iconText + nombre.split(' ').slice(0,1).join(' ');
+    }
+    
+    // Actualizar links de Google Maps con dirección real
+    document.querySelectorAll('.dyn-maps-link').forEach(function(el){
+      el.href = 'https://maps.google.com/?q='+encodeURIComponent(dir+', '+ciudad);
+    });
+    
+    // Hero subtitle ciudad
+    document.querySelectorAll('.dyn-ciudad-hero').forEach(function(el){
+      el.textContent = 'Reparación profesional de celulares, laptops, PC, consolas y Smart TV en '+ciudad+'. Liberaciones, desbloqueos y venta de accesorios originales.';
+    });
+    
+    // Contact footer info
+    document.querySelectorAll('.dyn-contact-tel').forEach(function(el){ el.textContent = tel; });
+    document.querySelectorAll('.dyn-contact-dir').forEach(function(el){ el.textContent = dir; });
+    document.querySelectorAll('.dyn-contact-horario').forEach(function(el){ el.textContent = horario; });
+    
+  } catch(e){ console.log('Config web error:', e); }
+}
+
+// Carga iniciada desde cargarContenidoWeb()
+
+// ── CARGAR CONTENIDO DINÁMICO DESDE SUPABASE ─────────────────────
+async function cargarContenidoWeb(){
+  try {
+    // Servicios
+    var resSrv = await db.from('web_servicios').select('*').eq('activo',true).order('orden');
+    if(resSrv.data && resSrv.data.length){
+      var grid = document.getElementById('servicios-grid');
+      if(grid){
+        grid.innerHTML = resSrv.data.map(function(s){
+          var tags = s.tags ? s.tags.split(',').map(function(t){ return '<span class="tag">'+t.trim()+'</span>'; }).join('') : '';
+          return '<div class="service-card reveal">'
+            +'<span class="service-icon">'+s.icono+'</span>'
+            +'<div class="service-name">'+s.nombre+'</div>'
+            +'<p class="service-desc">'+(s.descripcion||'')+'</p>'
+            +(tags?'<div class="service-tags">'+tags+'</div>':'')
+            +(s.precio_desde?'<div class="price-tag">'+s.precio_desde+'</div>':'')
+            +'</div>';
+        }).join('');
+        // Re-observe new elements
+        grid.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+      }
+    }
+
+    // Catálogo
+    var resCat = await db.from('web_catalogo').select('*').eq('activo',true).order('orden');
+    if(resCat.data && resCat.data.length){
+      var cat = document.getElementById('catalog-grid');
+      if(cat){
+        cat.innerHTML = resCat.data.map(function(p){
+          return '<div class="product-card reveal">'
+            +'<span class="product-emoji">'+p.emoji+'</span>'
+            +'<div class="product-name">'+p.nombre+'</div>'
+            +'<div class="product-price">'+(p.precio||'Consultar')+'</div>'
+            +'<div class="product-stock">'+(p.stock_texto||'')+'</div>'
+            +'</div>';
+        }).join('');
+        cat.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+      }
+    }
+
+    // Testimonios
+    var resTest = await db.from('web_testimonios').select('*').eq('activo',true).order('orden');
+    if(resTest.data && resTest.data.length){
+      var testGrid = document.getElementById('testimonios-grid');
+      if(testGrid){
+        testGrid.innerHTML = resTest.data.map(function(t){
+          var stars = '★'.repeat(t.estrellas||5)+'☆'.repeat(5-(t.estrellas||5));
+          return '<div class="testimonio-card reveal">'
+            +'<div class="stars">'+stars+'</div>'
+            +'<p class="testimonio-text">'+t.texto+'</p>'
+            +'<div class="testimonio-author">'
+            +'<div class="author-avatar">'+(t.inicial||t.nombre.charAt(0))+'</div>'
+            +'<div><div class="author-name">'+t.nombre+'</div>'
+            +'<div class="author-service">'+(t.servicio||'')+'</div></div>'
+            +'</div></div>';
+        }).join('');
+        testGrid.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+      }
+    }
+
+    // Blog
+    var resBlog = await db.from('web_blog').select('*').eq('activo',true).order('orden');
+    if(resBlog.data && resBlog.data.length){
+      var blogGrid = document.getElementById('blog-grid');
+      if(blogGrid){
+        blogGrid.innerHTML = resBlog.data.map(function(b){
+          return '<div class="blog-card reveal">'
+            +'<div class="blog-img">'+b.emoji+'</div>'
+            +'<div class="blog-content">'
+            +(b.categoria?'<div class="blog-tag">'+b.categoria+'</div>':'')
+            +'<div class="blog-title">'+b.titulo+'</div>'
+            +(b.extracto?'<p class="blog-excerpt">'+b.extracto+'</p>':'')
+            +'<div class="blog-meta"><span></span><span style="color:var(--acc)">Leer más →</span></div>'
+            +'</div></div>';
+        }).join('');
+        blogGrid.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+      }
+    }
+
+    // Hero dinámico
+    var cfg2 = {};
+    var resCfg = await db.from('config').select('*');
+    if(resCfg.data) resCfg.data.forEach(function(r){ cfg2[r.clave]=r.valor; });
+
+    // Secciones mostrar/ocultar
+    var secciones = ['servicios','catalogo','seguimiento','testimonios','blog','contacto'];
+    secciones.forEach(function(s){
+      var sec = document.getElementById(s);
+      if(sec && cfg2['web_seccion_'+s]==='false') sec.style.display='none';
+      else if(sec) sec.style.display='';
+    });
+
+    // Hero stats
+    var stat1 = document.querySelector('.stat-item:nth-child(1) .num');
+    var stat2 = document.querySelector('.stat-item:nth-child(2) .num');
+    var stat3 = document.querySelector('.stat-item:nth-child(3) .num');
+    var lbl1 = document.querySelector('.stat-item:nth-child(1) .lbl');
+    var lbl2 = document.querySelector('.stat-item:nth-child(2) .lbl');
+    var lbl3 = document.querySelector('.stat-item:nth-child(3) .lbl');
+    if(stat1 && cfg2.hero_stats_reparaciones) stat1.textContent = cfg2.hero_stats_reparaciones;
+    if(stat2 && cfg2.hero_stats_calificacion) stat2.textContent = cfg2.hero_stats_calificacion;
+    if(stat3 && cfg2.hero_stats_tiempo) stat3.textContent = cfg2.hero_stats_tiempo;
+    if(lbl1 && cfg2.hero_stats_reparaciones_lbl) lbl1.textContent = cfg2.hero_stats_reparaciones_lbl;
+    if(lbl2 && cfg2.hero_stats_calificacion_lbl) lbl2.textContent = cfg2.hero_stats_calificacion_lbl;
+    if(lbl3 && cfg2.hero_stats_tiempo_lbl) lbl3.textContent = cfg2.hero_stats_tiempo_lbl;
+
+    // Hero title/slogan
+    var heroSlogan = document.querySelector('.hero-title .line2');
+    if(heroSlogan && cfg2.hero_titulo) heroSlogan.textContent = cfg2.hero_titulo;
+
+  } catch(e){ console.log('Error cargando contenido web:', e); }
+}
+
+// Cargar todo al inicio
+cargarConfigWeb();
+cargarContenidoWeb();
+</script>
+
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('/sw.js').catch(function(){});
+  });
+}
 </script>
 </body>
 </html>

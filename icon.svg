@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="80" fill="#07090f"/>
+  <rect x="40" y="40" width="432" height="432" rx="60" fill="#0d1f38" stroke="#00e5ff" stroke-width="4"/>
+  <!-- Phone icon -->
+  <rect x="156" y="100" width="140" height="240" rx="20" fill="none" stroke="#00e5ff" stroke-width="12"/>
+  <rect x="186" y="120" width="80" height="8" rx="4" fill="#00e5ff" opacity="0.4"/>
+  <circle cx="226" cy="316" r="10" fill="#00e5ff" opacity="0.6"/>
+  <!-- Gear/tools icon -->
+  <circle cx="310" cy="340" r="55" fill="#0d1f38" stroke="#7c3aed" stroke-width="8"/>
+  <circle cx="310" cy="340" r="22" fill="none" stroke="#7c3aed" stroke-width="8"/>
+  <rect x="303" y="278" width="14" height="20" rx="4" fill="#7c3aed"/>
+  <rect x="303" y="384" width="14" height="20" rx="4" fill="#7c3aed"/>
+  <rect x="248" y="333" width="20" height="14" rx="4" fill="#7c3aed"/>
+  <rect x="354" y="333" width="20" height="14" rx="4" fill="#7c3aed"/>
+  <!-- CS text -->
+  <text x="256" y="460" text-anchor="middle" font-family="Arial Black" font-weight="900" font-size="48" fill="#00e5ff" letter-spacing="4">CS</text>
+</svg>

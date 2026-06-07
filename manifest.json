@@ -1,0 +1,44 @@
+{
+  "name": "COMPUCEL SOLUTIONS JM",
+  "short_name": "COMPUCEL",
+  "description": "Sistema de gestión para servicio técnico especializado",
+  "start_url": "/admin.html",
+  "display": "standalone",
+  "background_color": "#07090f",
+  "theme_color": "#00e5ff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "lang": "es",
+  "dir": "ltr",
+  "scope": "/",
+  "shortcuts": [
+    {
+      "name": "Nueva Orden",
+      "short_name": "Orden",
+      "description": "Crear nueva orden de servicio",
+      "url": "/admin.html#ordenes",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Ver Órdenes",
+      "short_name": "Órdenes",
+      "description": "Ver todas las órdenes",
+      "url": "/admin.html",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
