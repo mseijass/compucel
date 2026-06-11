@@ -1627,9 +1627,8 @@ async function imprimirVenta(ventaId){
     + '<hr><p class="total">TOTAL: <span style="float:right">'+fmt(v.total)+'</span></p>'
     + '<p>Pago: '+v.metodo_pago+'</p><hr>'
     + '<p style="text-align:center">Gracias por su compra!</p>'
-    + '<scr'+'ipt>window.print();window.close();<'+'/scr'+'ipt>
-
-</body></html>';
+    + '<scr'+'ipt>window.print();window.close();<'+'/scr'+'ipt>'
+    + '</body></html>';
   const w = window.open('','_blank');
   w.document.write(html);
 }
@@ -2012,9 +2011,7 @@ function imprimirOrden(id){
     +'</div></div>'
     +'</div>'
     +'<scr'+'ipt>window.onload=function(){window.print();}<'+'/scr'+'ipt>'
-    +'
-
-</body></html>';
+    +'</body></html>';
 
   var w = window.open('','_blank','width=800,height=600');
   w.document.open();
