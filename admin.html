@@ -3591,7 +3591,7 @@ async function deleteUser(id, nombre){
 
 // ── ADMIN TABS ────────────────────────────────────────────────────
 function showAdminTab(name){
-  ['marca','contacto','orden','servicios','whatsapp','usuarios'].forEach(t=>{
+  ['marca','contacto','orden','servicios','whatsapp','usuarios','recordatorios','web'].forEach(t=>{
     const v=document.getElementById('aview-'+t); if(v) v.style.display=t===name?'block':'none';
     const b=document.getElementById('atab-'+t); if(b) b.classList.toggle('active',t===name);
   });
