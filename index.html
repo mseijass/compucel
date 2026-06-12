@@ -626,6 +626,8 @@ async function cargarConfigWeb(){
     var slogan    = cfg.slogan || 'Tu tecnología en las mejores manos';
     var tel       = cfg.telefono || '+56 9 7972 6434';
     window._cfg_tel_raw = telRaw;
+    window._cfg_moneda_locale = cfg.moneda_locale || 'es-CL';
+    window._cfg_moneda_codigo = cfg.moneda_codigo || 'CLP';
     var telRaw    = tel.replace(/\D/g,'');
     var dir       = cfg.direccion || 'Pasaje Diecisiete 89, Curicó';
     var horario   = cfg.horario || 'Lunes a Sábado 10:00-20:00';

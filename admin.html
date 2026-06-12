@@ -510,6 +510,7 @@ td{padding:11px 16px;font-size:13px}
         <div style="display:flex;gap:4px;margin-bottom:20px;background:var(--s2);border:1px solid var(--bd);border-radius:var(--r2);padding:4px">
           <button class="admin-tab active" onclick="showAdminTab('marca')" id="atab-marca">🎨 Marca</button>
           <button class="admin-tab" onclick="showAdminTab('contacto')" id="atab-contacto">📞 Contacto</button>
+          <button class="admin-tab" onclick="showAdminTab('region')" id="atab-region">🌎 Región y Moneda</button>
           <button class="admin-tab" onclick="showAdminTab('orden')" id="atab-orden">📄 Orden</button>
           <button class="admin-tab" onclick="showAdminTab('servicios')" id="atab-servicios">🛠️ Servicios</button>
           <button class="admin-tab" onclick="showAdminTab('whatsapp')" id="atab-whatsapp">💬 WhatsApp</button>
@@ -572,6 +573,72 @@ td{padding:11px 16px;font-size:13px}
             </div>
             <button class="btn btn-primary btn-sm" style="margin-top:16px" onclick="saveContacto()">💾 Guardar contacto</button>
           </div>
+
+        <!-- TAB: REGIÓN Y MONEDA -->
+        <div id="aview-region" style="display:none">
+          <div class="admin-card">
+            <h3>🌎 Región, Moneda y WhatsApp</h3>
+            <p style="font-size:12px;color:var(--t2);margin-bottom:16px">Configura estos valores si vas a usar el sistema en otro país. Todo el sistema (precios, fechas, mensajes de WhatsApp) se adaptará automáticamente.</p>
+            <div class="form-grid">
+              <div class="field">
+                <label>País</label>
+                <select id="rg-pais" onchange="aplicarPresetPais()">
+                  <option value="custom">— Personalizado —</option>
+                  <option value="CL">🇨🇱 Chile</option>
+                  <option value="CO">🇨🇴 Colombia</option>
+                  <option value="MX">🇲🇽 México</option>
+                  <option value="PE">🇵🇪 Perú</option>
+                  <option value="AR">🇦🇷 Argentina</option>
+                  <option value="EC">🇪🇨 Ecuador</option>
+                  <option value="US">🇺🇸 Estados Unidos</option>
+                  <option value="ES">🇪🇸 España</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Código de país WhatsApp</label>
+                <input type="text" id="rg-codigo-pais" placeholder="56" maxlength="4">
+                <span style="font-size:11px;color:var(--t2);margin-top:4px;display:block">Sin el +. Ej: 56 (Chile), 57 (Colombia), 52 (México)</span>
+              </div>
+              <div class="field">
+                <label>Código de moneda (ISO 4217)</label>
+                <input type="text" id="rg-moneda-codigo" placeholder="CLP" maxlength="4" style="text-transform:uppercase">
+                <span style="font-size:11px;color:var(--t2);margin-top:4px;display:block">Ej: CLP, COP, MXN, USD, PEN, ARS, EUR</span>
+              </div>
+              <div class="field">
+                <label>Locale (idioma/región)</label>
+                <input type="text" id="rg-locale" placeholder="es-CL">
+                <span style="font-size:11px;color:var(--t2);margin-top:4px;display:block">Ej: es-CL, es-CO, es-MX, es-PE, en-US</span>
+              </div>
+              <div class="field">
+                <label>Símbolo de moneda (respaldo)</label>
+                <input type="text" id="rg-moneda-simbolo" placeholder="$" maxlength="4">
+              </div>
+              <div class="field">
+                <label>Vista previa de precio</label>
+                <div id="rg-preview" style="background:var(--s3);border:1px solid var(--bd);border-radius:var(--r);padding:10px 14px;font-family:var(--mono);font-size:14px;color:var(--acc)">$15.000</div>
+              </div>
+            </div>
+
+            <hr style="border:none;border-top:1px solid var(--bd);margin:24px 0">
+
+            <h4 style="font-size:13px;margin-bottom:12px;color:var(--t1)">📲 Notificaciones WhatsApp al Admin (CallMeBot)</h4>
+            <p style="font-size:12px;color:var(--t2);margin-bottom:16px">Para recibir alertas automáticas (recordatorios, nuevas órdenes) en tu WhatsApp. Necesitas activar <a href="https://www.callmebot.com/blog/free-api-whatsapp-messages/" target="_blank" style="color:var(--acc)">CallMeBot</a> con tu número y obtener tu API Key.</p>
+            <div class="form-grid">
+              <div class="field">
+                <label>Tu número de WhatsApp (con código de país)</label>
+                <input type="text" id="rg-cb-phone" placeholder="56979726434">
+                <span style="font-size:11px;color:var(--t2);margin-top:4px;display:block">Sin espacios ni símbolos. Ej: 56979726434</span>
+              </div>
+              <div class="field">
+                <label>API Key de CallMeBot</label>
+                <input type="text" id="rg-cb-key" placeholder="3610975">
+              </div>
+            </div>
+
+            <button class="btn btn-primary btn-sm" style="margin-top:16px" onclick="saveRegionConfig()">💾 Guardar configuración regional</button>
+            <button class="btn btn-secondary btn-sm" style="margin-top:16px;margin-left:8px" onclick="testCallMeBot()">🧪 Probar WhatsApp Admin</button>
+          </div>
+        </div>
         </div>
 
         <!-- TAB: ORDEN -->
@@ -1214,9 +1281,17 @@ let allOrdenes = [], allInv = [], allCaja = [], cfg = {}, allClientesDB = [], se
 let editOrdenId = null, editClienteId = null, editUserId = null;
 
 // ── UTILS ─────────────────────────────────────────────────────────
-const fmt = n => new Intl.NumberFormat('es-CL',{style:'currency',currency:'CLP',maximumFractionDigits:0}).format(n||0);
-const fmtD = d => d ? new Date(d).toLocaleDateString('es-CL',{day:'2-digit',month:'2-digit',year:'numeric'}) : '—';
-const fmtDT = d => d ? new Date(d).toLocaleString('es-CL',{day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'}) : '—';
+function fmt(n){
+  var locale = (cfg && cfg.moneda_locale) || 'es-CL';
+  var currency = (cfg && cfg.moneda_codigo) || 'CLP';
+  try{
+    return new Intl.NumberFormat(locale,{style:'currency',currency:currency,maximumFractionDigits:0}).format(n||0);
+  }catch(e){
+    return (cfg.moneda_simbolo||'$')+Number(n||0).toLocaleString(locale);
+  }
+}
+const fmtD = d => d ? new Date(d).toLocaleDateString((cfg&&cfg.moneda_locale)||'es-CL',{day:'2-digit',month:'2-digit',year:'numeric'}) : '—';
+const fmtDT = d => d ? new Date(d).toLocaleString((cfg&&cfg.moneda_locale)||'es-CL',{day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'}) : '—';
 const genId = () => { const n=new Date(),y=n.getFullYear().toString().slice(2),m=String(n.getMonth()+1).padStart(2,'0'),d=String(n.getDate()).padStart(2,'0'); return `OS-${y}${m}${d}-${Math.floor(Math.random()*9000+1000)}`; };
 function toast(title,msg,type='ok'){ const t=document.getElementById('toast'); document.getElementById('t-title').textContent=title; document.getElementById('t-msg').textContent=msg||''; document.getElementById('t-icon').textContent=type==='ok'?'✓':type==='err'?'✕':'ℹ'; t.className='toast '+type+' show'; setTimeout(()=>t.classList.remove('show'),3500); }
 function closeModal(id){ document.getElementById(id).style.display='none'; }
@@ -1244,6 +1319,7 @@ async function doLogin(){
   document.getElementById('user-av').textContent = data.nombre.charAt(0).toUpperCase();
   if(data.rol !== 'admin'){ document.getElementById('nav-admin').style.display='none'; document.getElementById('nav-sec-admin').style.display='none'; }
   await loadConfig();
+  actualizarCallMeBot();
   loadAll();
   // Start recordatorios system
   setTimeout(loadRecordatoriosConfig, 2000);
@@ -2572,6 +2648,94 @@ async function deleteWebItem(tabla){
   if(reloads[tabla]) reloads[tabla]();
 }
 
+
+// ══════════════════════════════════════════════════════════════════
+// ── MÓDULO REGIÓN, MONEDA Y WHATSAPP ─────────────────────────────
+// ══════════════════════════════════════════════════════════════════
+var PAIS_PRESETS = {
+  CL: {codigo_pais:'56', moneda_codigo:'CLP', locale:'es-CL', simbolo:'$'},
+  CO: {codigo_pais:'57', moneda_codigo:'COP', locale:'es-CO', simbolo:'$'},
+  MX: {codigo_pais:'52', moneda_codigo:'MXN', locale:'es-MX', simbolo:'$'},
+  PE: {codigo_pais:'51', moneda_codigo:'PEN', locale:'es-PE', simbolo:'S/'},
+  AR: {codigo_pais:'54', moneda_codigo:'ARS', locale:'es-AR', simbolo:'$'},
+  EC: {codigo_pais:'593', moneda_codigo:'USD', locale:'es-EC', simbolo:'$'},
+  US: {codigo_pais:'1', moneda_codigo:'USD', locale:'en-US', simbolo:'$'},
+  ES: {codigo_pais:'34', moneda_codigo:'EUR', locale:'es-ES', simbolo:'€'}
+};
+
+function loadRegionConfig(){
+  document.getElementById('rg-pais').value = cfg.pais_codigo || 'CL';
+  document.getElementById('rg-codigo-pais').value = cfg.cb_codigo_pais || '56';
+  document.getElementById('rg-moneda-codigo').value = cfg.moneda_codigo || 'CLP';
+  document.getElementById('rg-locale').value = cfg.moneda_locale || 'es-CL';
+  document.getElementById('rg-moneda-simbolo').value = cfg.moneda_simbolo || '$';
+  document.getElementById('rg-cb-phone').value = cfg.cb_phone || CB_PHONE;
+  document.getElementById('rg-cb-key').value = cfg.cb_key || CB_KEY;
+  actualizarPreviewMoneda();
+}
+
+function aplicarPresetPais(){
+  var pais = document.getElementById('rg-pais').value;
+  if(pais==='custom') return;
+  var preset = PAIS_PRESETS[pais];
+  if(!preset) return;
+  document.getElementById('rg-codigo-pais').value = preset.codigo_pais;
+  document.getElementById('rg-moneda-codigo').value = preset.moneda_codigo;
+  document.getElementById('rg-locale').value = preset.locale;
+  document.getElementById('rg-moneda-simbolo').value = preset.simbolo;
+  actualizarPreviewMoneda();
+}
+
+function actualizarPreviewMoneda(){
+  var locale = document.getElementById('rg-locale').value || 'es-CL';
+  var moneda = document.getElementById('rg-moneda-codigo').value || 'CLP';
+  var preview = document.getElementById('rg-preview');
+  try{
+    preview.textContent = new Intl.NumberFormat(locale,{style:'currency',currency:moneda,maximumFractionDigits:0}).format(15000);
+  }catch(e){
+    preview.textContent = (document.getElementById('rg-moneda-simbolo').value||'$')+'15.000';
+  }
+}
+
+// Live preview on input
+document.addEventListener('input', function(e){
+  if(['rg-locale','rg-moneda-codigo','rg-moneda-simbolo'].includes(e.target.id)){
+    actualizarPreviewMoneda();
+  }
+});
+
+async function saveRegionConfig(){
+  var updates = [
+    {clave:'pais_codigo', valor:document.getElementById('rg-pais').value},
+    {clave:'cb_codigo_pais', valor:document.getElementById('rg-codigo-pais').value.trim()},
+    {clave:'moneda_codigo', valor:document.getElementById('rg-moneda-codigo').value.trim().toUpperCase()},
+    {clave:'moneda_locale', valor:document.getElementById('rg-locale').value.trim()},
+    {clave:'moneda_simbolo', valor:document.getElementById('rg-moneda-simbolo').value.trim()},
+    {clave:'cb_phone', valor:document.getElementById('rg-cb-phone').value.trim().replace(/\D/g,'')},
+    {clave:'cb_key', valor:document.getElementById('rg-cb-key').value.trim()}
+  ];
+  for(var u of updates){
+    if(!u.valor) continue;
+    await db.from('config').upsert({clave:u.clave, valor:u.valor},{onConflict:'clave'});
+    cfg[u.clave] = u.valor;
+  }
+  actualizarCallMeBot();
+  toast('Configuración regional guardada','Moneda, idioma y WhatsApp actualizados');
+}
+
+async function testCallMeBot(){
+  var phone = document.getElementById('rg-cb-phone').value.trim().replace(/\D/g,'');
+  var key = document.getElementById('rg-cb-key').value.trim();
+  if(!phone||!key){ toast('Error','Completa número y API Key primero','err'); return; }
+  var msg = encodeURIComponent('Prueba de notificacion - '+(cfg.nombre_negocio||'Sistema de gestion')+'. Si recibes esto, CallMeBot esta configurado correctamente.');
+  try{
+    await fetch('https://api.callmebot.com/whatsapp.php?phone='+phone+'&text='+msg+'&apikey='+key, {mode:'no-cors'});
+    toast('Prueba enviada','Revisa tu WhatsApp en unos segundos','info');
+  }catch(e){
+    toast('Error','No se pudo enviar la prueba','err');
+  }
+}
+
 // ── DASHBOARD ─────────────────────────────────────────────────────
 async function loadDashboard(){
   const today = new Date().toISOString().split('T')[0];
@@ -2854,7 +3018,7 @@ async function saveOrden(){
   if(!nombre||!tel||!tipo||!marca||!modelo||!srv){ toast('Campos requeridos','Completa los campos obligatorios (*)','err'); return; }
   const accs=[...document.querySelectorAll('#acc-grid input:checked')].map(c=>c.value).join(', ')||'Ninguno';
   const costo=document.getElementById('f-srv-costo').value.replace(/[^0-9]/g,'');
-  const orden={id:genId(),cliente_nombre:nombre,cliente_telefono:tel,cliente_email:document.getElementById('f-cli-email').value.trim()||null,cliente_rut:document.getElementById('f-cli-rut').value.trim()||null,cliente_direccion:document.getElementById('f-cli-dir').value.trim()||null,equipo_tipo:tipo,equipo_marca:marca,equipo_modelo:modelo,equipo_color:document.getElementById('f-eq-color').value.trim()||null,equipo_imei:document.getElementById('f-eq-imei').value.trim()||null,equipo_password:document.getElementById('f-eq-pass').value.trim()||null,accesorios:accs,servicio_tipo:srv,tecnico:document.getElementById('f-srv-tec').value.trim()||null,servicio_descripcion:document.getElementById('f-srv-desc').value.trim()||null,servicio_observaciones:document.getElementById('f-srv-obs').value.trim()||null,costo_estimado:costo?'$'+Number(costo).toLocaleString('es-CL'):null,fecha_entrega:document.getElementById('f-srv-fecha').value||null,prioridad:currentPrio,status:'recibido'};
+  const orden={id:genId(),cliente_nombre:nombre,cliente_telefono:tel,cliente_email:document.getElementById('f-cli-email').value.trim()||null,cliente_rut:document.getElementById('f-cli-rut').value.trim()||null,cliente_direccion:document.getElementById('f-cli-dir').value.trim()||null,equipo_tipo:tipo,equipo_marca:marca,equipo_modelo:modelo,equipo_color:document.getElementById('f-eq-color').value.trim()||null,equipo_imei:document.getElementById('f-eq-imei').value.trim()||null,equipo_password:document.getElementById('f-eq-pass').value.trim()||null,accesorios:accs,servicio_tipo:srv,tecnico:document.getElementById('f-srv-tec').value.trim()||null,servicio_descripcion:document.getElementById('f-srv-desc').value.trim()||null,servicio_observaciones:document.getElementById('f-srv-obs').value.trim()||null,costo_estimado:costo?(cfg.moneda_simbolo||'$')+Number(costo).toLocaleString((cfg&&cfg.moneda_locale)||'es-CL'):null,fecha_entrega:document.getElementById('f-srv-fecha').value||null,prioridad:currentPrio,status:'recibido'};
   const {error}=await db.from('ordenes').insert([orden]);
   if(error){ toast('Error al guardar',error.message,'err'); return; }
   closeModal('modal-orden');
@@ -2997,8 +3161,12 @@ async function cambiarStatus(id,s){
 }
 
 // ── CALLMEBOT NOTIFICACIONES ──────────────────────────────────────
-const CB_PHONE = '56979726434';
-const CB_KEY   = '3610975';
+var CB_PHONE = '56979726434';
+var CB_KEY = '3610975';
+function actualizarCallMeBot(){
+  CB_PHONE = (cfg.cb_phone || CB_PHONE).replace(/\D/g,'');
+  CB_KEY = cfg.cb_key || CB_KEY;
+}
 
 // WA messages now handled by buildWAMsg()
 
@@ -3482,6 +3650,7 @@ async function saveMov(){ const con=document.getElementById('fc-con').value.trim
 // ── ADMIN ─────────────────────────────────────────────────────────
 async function loadAdminView(){ 
   await loadConfig();
+  actualizarCallMeBot();
   await loadServicios();
   applyConfig(); 
   showAdminTab('marca');
@@ -3591,7 +3760,7 @@ async function deleteUser(id, nombre){
 
 // ── ADMIN TABS ────────────────────────────────────────────────────
 function showAdminTab(name){
-  ['marca','contacto','orden','servicios','whatsapp','usuarios','recordatorios','web'].forEach(t=>{
+  ['marca','contacto','region','orden','servicios','whatsapp','usuarios','recordatorios','web'].forEach(t=>{
     const v=document.getElementById('aview-'+t); if(v) v.style.display=t===name?'block':'none';
     const b=document.getElementById('atab-'+t); if(b) b.classList.toggle('active',t===name);
   });
@@ -3601,6 +3770,7 @@ function showAdminTab(name){
   if(name==='recordatorios'){ loadRecordatoriosConfig(); }
   if(name==='web'){ showWebTab('hero'); }
   if(name==='contacto'||name==='marca'||name==='orden') applyConfig();
+  if(name==='region') loadRegionConfig();
 }
 
 // ── ADMIN: MARCA ──────────────────────────────────────────────────
